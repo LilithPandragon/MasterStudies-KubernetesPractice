@@ -4,7 +4,7 @@ Group 01 Harald Beier Susanne Peer Patrick Prugger
 ```
 # Step 1
 ## Branch Protection
-> Activated but the rule from Github: ==Your rules won't be enforced on this private repository until one of your organization's owners upgrades the account to GitHub Team or Enterprise==.
+> Activated but the rule from Github: == Your rules won't be enforced on this private repository until one of your organization's owners upgrades the account to GitHub Team or Enterprise ==.
 ## Description for Usage
 - WSL installed
 - Rancher desktop installed
