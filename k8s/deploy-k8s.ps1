@@ -55,6 +55,7 @@ Write-Host "Applying CronJob as producer..."
 kubectl apply -f ./cronjob.yaml
 
 Write-Host "Applying Consumer deployment..."
+kubectl apply -f ./consumer-serviceaccount.yaml
 kubectl apply -f ./consumer-deployment.yaml
 kubectl apply -f ./consumer-service.yaml
 

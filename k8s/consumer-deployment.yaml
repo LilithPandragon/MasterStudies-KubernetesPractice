@@ -12,11 +12,9 @@ spec:
       labels:
         app: consumer
     spec:
-      # Add security context at pod level
+      serviceAccountName: consumer-sa
       securityContext:
         runAsNonRoot: true
-        seccompProfile:
-          type: RuntimeDefault
       containers:
       - name: consumer
         image: ghcr.io/mcce2024/akkt1-g1-consumer:latest
