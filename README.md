@@ -1,22 +1,30 @@
-# Group 1 Kubernetes Deployment
+# AKTT1 Group 1 Kubernetes Deployment
 ```
-Group 01 Harald Beier Susanne Peer Patrick Prugger
+Group 01 
+Harald Beier 
+Susanne Peer 
+Patrick Prugger
 ```
-# Step 2 Application - May the flower power with you
+# Step 2 Application - May the flower power be with you
 ## Branch Protection
 > Activated but the rule from Github: *Your rules won't be enforced on this private repository until one of your organization's owners upgrades the account to GitHub Team or Enterprise.*
+
+
 ## Description for Usage
 - WSL installed
 - Rancher desktop installed
 - IDE of Choice
 - Project pulled
 - Rancher desktop up and running
-- To start the application you just have to start ./deploy-k8s.ps1
+- To start the application you just have to run ./deploy-k8s.ps1
+- To delete the application you just have to run ./delete-deployment.ps1
+- 
 ## Description of functionality
 - Producer generates JSON with datetime in UTC
 - RabbitMQ is used as messaging queue
 - Consumer uses JS for visualisation of JSON with minimal functionality (Refresh, Delete and a little extra because we love it if a plan is working)
 - K8S manifest includes the configuration Yamls for the different services
+  
 ## 12 Factor App 
 1. **Codebase:** github used as revision control. Dev and Main branches
 2. **Dependencies:** Explicitly declare and isolate dependencies
@@ -37,18 +45,13 @@ Group 01 Harald Beier Susanne Peer Patrick Prugger
 
 # Step 3: Kubernetes Application Security Checklist and implement 2-3 aspects in your manifest 
 ## Base security hardening
-### Application design 
-### Service account
-### Pod-level securityContext recommendations
-### Container-level securityContext recommendations 
-### Role Based Access Control (RBAC) 
-### Image security
-### Network policies
-## Advanced security hardening 
-### Linux container security 
-### Runtime classes
-
-#########################################################################################
+- Application design 
+- Service account
+- Pod-level securityContext recommendations
+- Container-level securityContext recommendations 
+- Role Based Access Control (RBAC) 
+- Image security
+- Network policies
 
 ## **Security Configuration**
 ### **Base Security Hardening**
@@ -85,5 +88,9 @@ The deployment includes NetworkPolicies to control pod-to-pod communication:
 - Allows outbound AMQP communication to RabbitMQ
 - Enables DNS resolution (TCP/UDP port 53)
 
-#########################################################################################
 
+## Pull-Request for Step 3
+- Sent to Group 2
+- Sent at 2024-12-27
+
+# Step 4: Templating (optional)
