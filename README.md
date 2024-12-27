@@ -15,7 +15,7 @@ Group 01 Harald Beier Susanne Peer Patrick Prugger
 ## Description of functionality
 - Producer generates JSON with datetime in UTC
 - RabbitMQ is used as messaging queue
-- Consumer uses JS for visualisation of JSON with minimal functionality (Refresh, Delete and a little extra)
+- Consumer uses JS for visualisation of JSON with minimal functionality (Refresh, Delete and a little extra because we love it if a plan is working)
 - K8S manifest includes the configuration Yamls for the different services
 ## 12 Factor App 
 1. **Codebase:** github used as revision control. Dev and Main branches
