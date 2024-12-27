@@ -30,10 +30,10 @@ Group 01 Harald Beier Susanne Peer Patrick Prugger
 10. **Dev/prod parity:** Keep development, staging, and production as similar as possible
 11. **Logs:** Treat logs as event streams
 12. **Admin processes:** Run admin/management tasks as one-off processes
+
 ## Pull-Request for Step 2
-- Send to Group 2
-- Send at 2024-12-27
-- 
+- Sent to Group 2
+- Sent at 2024-12-27
 
 # Step 3: Kubernetes Application Security Checklist and implement 2-3 aspects in your manifest 
 ## Base security hardening
@@ -47,4 +47,43 @@ Group 01 Harald Beier Susanne Peer Patrick Prugger
 ## Advanced security hardening 
 ### Linux container security 
 ### Runtime classes
+
+#########################################################################################
+
+## **Security Configuration**
+### **Base Security Hardening**
+1. **Pod Security Context:**
+   - Non-root user execution
+   - Read-only root filesystem
+   - Dropped capabilities
+   - RunAsUser and fsGroup defined
+
+2. **Container Security:**
+   - Resource limits enforced
+   - Latest base images used
+   - No privileged containers
+
+3. **RBAC Implementation:**
+   - Service accounts with minimal permissions
+   - Role-based access control for components
+   - Namespace isolation
+
+### **Network Policies**
+The deployment includes NetworkPolicies to control pod-to-pod communication:
+
+*RabbitMQ NetworkPolicy:*
+- Restricts AMQP port (5672) access to only Producer and Consumer pods
+- Management interface (15672) access:
+  - Exposed via LoadBalancer
+
+*Consumer NetworkPolicy:*
+- Allows incoming traffic on port 3000 (web server)
+- Permits bi-directional AMQP communication with RabbitMQ
+- Enables DNS resolution (TCP/UDP port 53)
+
+*Producer NetworkPolicy:*
+- Allows outbound AMQP communication to RabbitMQ
+- Enables DNS resolution (TCP/UDP port 53)
+
+#########################################################################################
 
