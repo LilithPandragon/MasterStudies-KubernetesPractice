@@ -15,6 +15,9 @@ spec:
     spec:
       serviceAccountName: rabbitmq-sa
       securityContext:
+        fsGroup: 999    # RabbitMQ group
+        runAsUser: 999  # RabbitMQ user
+        runAsGroup: 999 # RabbitMQ group
         runAsNonRoot: true
       containers:
       - name: rabbitmq
@@ -33,3 +36,8 @@ spec:
             secretKeyRef:
               name: rabbitmq-secret
               key: password
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL

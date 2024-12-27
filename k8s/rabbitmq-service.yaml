@@ -19,6 +19,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: rabbitmq-management
+  labels:
+    app: rabbitmq
+    serviceAccount: rabbitmq-sa
 spec:
   selector:
     app: rabbitmq
