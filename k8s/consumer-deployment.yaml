@@ -12,9 +12,31 @@ spec:
       labels:
         app: consumer
     spec:
+      # Add security context at pod level
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: consumer
         image: ghcr.io/mcce2024/akkt1-g1-consumer:latest
+        # Add container security context
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+          readOnlyRootFilesystem: true
+        # Add resource limits and requests
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
         ports:
         - containerPort: 3000
         env:
