@@ -11,7 +11,7 @@ kubectl delete -f ./rabbitmq-service.yaml
 kubectl delete -f ./rabbitmq-serviceaccount.yaml
 
 Write-Host "Deleting cronjob as producer..."
-kubectl delete -f ./cronjob.yaml
+kubectl delete -f ./producer.yaml
 kubectl delete -f ./producer-serviceaccount.yaml
 
 Write-Host "Deleting consumer deployment..."

@@ -49,7 +49,7 @@ kubectl apply -f ./rabbitmq-service.yaml
 
 echo "Applying CronJob as producer..."
 kubectl apply -f ./producer-serviceaccount.yaml
-kubectl apply -f ./cronjob.yaml
+kubectl apply -f ./producer.yaml
 
 echo "Applying Consumer deployment..."
 kubectl apply -f ./consumer-serviceaccount.yaml
