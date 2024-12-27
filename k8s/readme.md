@@ -1,59 +1,60 @@
-## **Deployen der Konfiguration**
-### **Schritte zum Starten**
-Hierzu navigiere in das Verzeichnis, in dem sich die Skripte und YAML-Dateien befinden.
-Führe das Bereitstellungsskript aus:
-   - Für Linux/MacOS:
-     ./deploy-k8s.sh
-   
-   - Für Windows (in powershell):
-     ./deploy-k8s.ps1
-    
-Das Skript führt folgendes aus:
-   - Generiert RabbitMQ Zugangsdaten und erstellt ein Secret (`rabbitmq-secret.yaml`)
-   - Deployt RabbitMQ, den Consumer-Service und den Producer als CronJob
-   - Zeigt laufenden Pods und Services an
+## **Deploying the project**
+### **Steps to start the containers in k8s**
+- Navigate to the k8s directory
+- Run the deployment script
 
-Am Ende werden die generierten Zugangsdaten im Terminal angezeigt. Notiere sie für die weitere Nutzung.
+-  For Linux:
+./deploy-k8s.sh
+
+- For Windows:
+./deploy-k8s.ps1
+
+**The script performs the following tasks:**
+   - Generates RabbitMQ credentials and creates a secret file (`rabbitmq-secret.yaml`)
+   - Deploys RabbitMQ, the Consumer service, and the Producer as a CronJob
+   - Displays running pods and services
+
+The generated credentials will be shown in the terminal at the end. Note them down for future use.
+The credentials change with every deployment.
 
 ######################################################################
 
-## *Kommunikation der Services*
+## *Service Communication*
 *RabbitMQ:*
-   - RabbitMQ wird über das Deployment `rabbitmq-deployment.yaml` gestartet.
-     Die Zugangsdaten werden aus dem Secret `rabbitmq-secret.yaml` bezogen.
-   - RabbitMQ hat zwei Services:
-     - **AMQP-Port (5672):** Für Nachrichten zwischen Producer und Consumer
-     - **Management-UI (15672):** Über `rabbitmq-management` erreichbar
+   - RabbitMQ is started via the `rabbitmq-deployment.yaml` deployment.
+     Credentials are obtained from the `rabbitmq-secret.yaml` secret.
+   - RabbitMQ has two services:
+     - **AMQP Port (5672):** For messages between Producer and Consumer
+     - **Management UI (15672):** Accessible via `rabbitmq-management` on the host on port 15672
 
 *Producer (CronJob):*
-   - Läuft jede Minute gemäß dem `cronjob.yaml`
-   - Produziert Nachrichten und sendet diese dann an RabbitMQ (Hostname: `rabbitmq`, Port: `5672`)
+   - Runs every minute according to `cronjob.yaml`
+   - Produces messages and sends them to RabbitMQ (Hostname: `rabbitmq`, Port: `5672`)
 
-*Consumer (Deployment und Service):*
-   - Lauscht/Hört auf Nachrichten von RabbitMQ
-   - Exponiert einen HTTP-Service (Port: `8080`) über den LoadBalancer `consumer-service.yaml`
+*Consumer (Deployment and Service):*
+   - Listens for messages from RabbitMQ
+   - Exposes an HTTP service (Port: `8080`) via the LoadBalancer `consumer-service.yaml`
 
 #######################################################################
 
-## **Löschen der Konfiguration**
-*Ausführen des Löschskript aus:*
-   - Für Linux/MacOS:
+## **Deleting the Configuration**
+*Execute the deletion script from:*
+   - For Linux/MacOS:
      ./delete-deployment.sh
 
-   - Für Windows (powershell):
+   - For Windows (PowerShell):
      ./delete-deployment.ps1
   
-*Das Skript entfernt:*
-   - RabbitMQ Deployment, Secret und Services
+*The script removes:*
+   - RabbitMQ Deployment, Secret, and Services
    - Producer (CronJob)
-   - Consumer (Deployment und Service)
+   - Consumer (Deployment and Service)
 
 #########################################################################
 
-- *Einfache Kommunikation:* RabbitMQ dient als Nachrichtenzentrale zwischen Producer & Consumer
-- *Konfigurationsänderungen:* Änderungen an der Deployment Strategie können in den entsprechenden
-                              YAML-Dateien vorgenommen werden.
-- *Fehlerbehebung:* `kubectl logs` für Debugging:
+- *Simple Communication:* RabbitMQ serves as a message center between Producer & Consumer
+- *Configuration Changes:* Changes to the deployment strategy can be made in the corresponding
+                          YAML files
+- *Troubleshooting:* Use `kubectl logs` for debugging:
 
   kubectl logs <POD-NAME>
-
