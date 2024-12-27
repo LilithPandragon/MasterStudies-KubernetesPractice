@@ -2,7 +2,7 @@
 ```
 Group 01 Harald Beier Susanne Peer Patrick Prugger
 ```
-# Step 1
+# Step 2 Application - May the flower power with you
 ## Branch Protection
 > Activated but the rule from Github: *Your rules won't be enforced on this private repository until one of your organization's owners upgrades the account to GitHub Team or Enterprise.*
 ## Description for Usage
@@ -30,4 +30,6 @@ Group 01 Harald Beier Susanne Peer Patrick Prugger
 10. **Dev/prod parity:** Keep development, staging, and production as similar as possible
 11. **Logs:** Treat logs as event streams
 12. **Admin processes:** Run admin/management tasks as one-off processes
+
+# Step 3: Kubernetes Application Security Checklist and implement 2-3 aspects in your manifest 
 
