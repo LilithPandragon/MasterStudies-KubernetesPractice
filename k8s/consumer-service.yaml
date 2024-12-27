@@ -2,10 +2,19 @@ apiVersion: v1
 kind: Service
 metadata:
   name: consumer
+  labels:
+    app: consumer
+  annotations:
+    security.kubernetes.io/owner: "MCCE-G1"
+    security.kubernetes.io/environment: "production"
 spec:
   selector:
     app: consumer
   ports:
   - port: 8080
     targetPort: 3000
+    # Explicitly name the port for better visibility
+    name: http
+    # Specify protocol explicitly
+    protocol: TCP
   type: LoadBalancer
