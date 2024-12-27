@@ -4,6 +4,7 @@ Write-Host "Deleting RabbitMQ deployment..."
 kubectl delete -f ./rabbitmq-secret.yaml
 kubectl delete -f ./rabbitmq-deployment.yaml
 kubectl delete -f ./rabbitmq-service.yaml
+kubectl delete -f ./rabbitmq-serviceaccount.yaml
 
 Write-Host "Deleting cronjob as producer..."
 kubectl delete -f ./cronjob.yaml

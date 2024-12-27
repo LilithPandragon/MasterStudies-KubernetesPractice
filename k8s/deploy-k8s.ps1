@@ -47,6 +47,8 @@ data:
 $secretYaml | Out-File -FilePath "./rabbitmq-secret.yaml" -Encoding UTF8 -Force
 
 Write-Host "Applying RabbitMQ deployment..."
+# Create the ServiceAccount
+kubectl apply -f ./rabbitmq-serviceaccount.yaml
 kubectl apply -f ./rabbitmq-secret.yaml
 kubectl apply -f ./rabbitmq-deployment.yaml
 kubectl apply -f ./rabbitmq-service.yaml

@@ -41,6 +41,7 @@ data:
 EOF
 
 echo "Applying RabbitMQ deployment..."
+kubectl apply -f ./rabbitmq-serviceaccount.yaml
 kubectl apply -f ./rabbitmq-secret.yaml
 kubectl apply -f ./rabbitmq-deployment.yaml
 kubectl apply -f ./rabbitmq-service.yaml

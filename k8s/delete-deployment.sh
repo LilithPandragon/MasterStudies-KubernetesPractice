@@ -6,7 +6,7 @@ echo "Deleting RabbitMQ deployment..."
 kubectl delete -f ./rabbitmq-secret.yaml
 kubectl delete -f ./rabbitmq-deployment.yaml
 kubectl delete -f ./rabbitmq-service.yaml
-
+kubectl delete -f ./rabbitmq-serviceaccount.yaml
 echo "Deleting cronjob as producer..."
 kubectl delete -f ./cronjob.yaml
 kubectl delete -f ./producer-serviceaccount.yaml
