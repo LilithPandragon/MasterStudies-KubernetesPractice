@@ -12,6 +12,7 @@ spec:
     spec:
       template:
         spec:
+          serviceAccountName: rabbitmq-producer-sa
           securityContext:
             runAsNonRoot: true
             runAsUser: 1000
