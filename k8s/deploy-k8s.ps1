@@ -1,5 +1,6 @@
 # Get and script directory
 $SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $scriptPath
 
 # Add prompt for rebuilding containers
 $REBUILD = Read-Host "Do you want to rebuild the containers? (y/n)"
@@ -61,6 +62,11 @@ Write-Host "Applying Consumer deployment..."
 kubectl apply -f ./consumer-serviceaccount.yaml
 kubectl apply -f ./consumer-deployment.yaml
 kubectl apply -f ./consumer-service.yaml
+
+Write-Host "Applying Network Policies..."
+kubectl apply -f ./rabbitmq-networkpolicy.yaml
+kubectl apply -f ./consumer-networkpolicy.yaml
+kubectl apply -f ./producer-networkpolicy.yaml
 
 Write-Host "Deployment completed!" 
 

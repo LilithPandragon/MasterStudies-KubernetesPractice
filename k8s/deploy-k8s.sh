@@ -1,6 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR"
 
 # Add prompt for rebuilding containers
 read -p "Do you want to rebuild the containers? (y/n): " REBUILD
@@ -54,6 +55,11 @@ echo "Applying Consumer deployment..."
 kubectl apply -f ./consumer-serviceaccount.yaml
 kubectl apply -f ./consumer-deployment.yaml
 kubectl apply -f ./consumer-service.yaml
+
+echo "Applying Network Policies..."
+kubectl apply -f ./rabbitmq-networkpolicy.yaml
+kubectl apply -f ./consumer-networkpolicy.yaml
+kubectl apply -f ./producer-networkpolicy.yaml
 
 echo "Deployment completed!"
 

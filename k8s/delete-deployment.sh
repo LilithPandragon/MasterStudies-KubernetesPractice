@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR"
+
 echo "Removing deployment..."
 
 echo "Deleting RabbitMQ deployment..."
@@ -15,5 +18,10 @@ echo "Deleting consumer deployment..."
 kubectl delete -f ./consumer-deployment.yaml
 kubectl delete -f ./consumer-service.yaml
 kubectl delete -f ./consumer-serviceaccount.yaml
+
+echo "Deleting Network Policies..."
+kubectl delete -f ./rabbitmq-networkpolicy.yaml
+kubectl delete -f ./consumer-networkpolicy.yaml
+kubectl delete -f ./producer-networkpolicy.yaml
 
 echo "Deployment removed!"
