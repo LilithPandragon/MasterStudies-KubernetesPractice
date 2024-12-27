@@ -142,6 +142,7 @@ app.get('/', (req, res) => {
             <script>
                 function refreshPage() {
                     const audio = document.getElementById('clickSound');
+                    audio.volume = 0.5;  // Set volume to 50% (0.5)
                     audio.play();
                     setTimeout(() => {
                         location.reload();
