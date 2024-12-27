@@ -4,11 +4,13 @@
 - Run the deployment script
 
 -  For Linux:
+```
 ./deploy-k8s.sh
-
+```
 - For Windows:
+```
 ./deploy-k8s.ps1
-
+```
 **The script performs the following tasks:**
    - Generates RabbitMQ credentials and creates a secret file (`rabbitmq-secret.yaml`)
    - Deploys RabbitMQ, the Consumer service, and the Producer as a CronJob
@@ -17,7 +19,7 @@
 The generated credentials will be shown in the terminal at the end. Note them down for future use.
 The credentials change with every deployment.
 
-######################################################################
+#########################################################################################
 
 ## *Service Communication*
 *RabbitMQ:*
@@ -35,26 +37,31 @@ The credentials change with every deployment.
    - Listens for messages from RabbitMQ
    - Exposes an HTTP service (Port: `8080`) via the LoadBalancer `consumer-service.yaml`
 
-#######################################################################
+#########################################################################################
 
 ## **Deleting the Configuration**
 *Execute the deletion script from:*
    - For Linux/MacOS:
+     ```
      ./delete-deployment.sh
-
+      ```
+     
    - For Windows (PowerShell):
-     ./delete-deployment.ps1
-  
+      c
+      ./delete-deployment.ps1
+     ```
+      
 *The script removes:*
    - RabbitMQ Deployment, Secret, and Services
    - Producer (CronJob)
    - Consumer (Deployment and Service)
 
-#########################################################################
+#########################################################################################
 
 - *Simple Communication:* RabbitMQ serves as a message center between Producer & Consumer
 - *Configuration Changes:* Changes to the deployment strategy can be made in the corresponding
                           YAML files
 - *Troubleshooting:* Use `kubectl logs` for debugging:
-
+```
   kubectl logs <POD-NAME>
+```
