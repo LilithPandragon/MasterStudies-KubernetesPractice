@@ -92,5 +92,9 @@ The deployment includes NetworkPolicies to control pod-to-pod communication:
 ## Pull-Request for Step 3
 - Sent to Group 2
 - Sent at 2024-12-27
+Unfortunately we pushed here to the same branch as the previous step.
+So all commits are now in the same pull request.
 
 # Step 4: Templating (optional)
+Lessons learned:
+-To avoid this problem for this step we have created a new branch called "templating".
