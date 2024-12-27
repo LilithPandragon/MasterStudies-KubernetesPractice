@@ -4,6 +4,7 @@ metadata:
   name: consumer
   labels:
     app: consumer
+    serviceAccount: consumer-sa
   annotations:
     security.kubernetes.io/owner: "MCCE-G1"
     security.kubernetes.io/environment: "production"
