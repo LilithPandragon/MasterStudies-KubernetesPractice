@@ -30,6 +30,21 @@ Group 01 Harald Beier Susanne Peer Patrick Prugger
 10. **Dev/prod parity:** Keep development, staging, and production as similar as possible
 11. **Logs:** Treat logs as event streams
 12. **Admin processes:** Run admin/management tasks as one-off processes
+## Pull-Request for Step 2
+- Send to Group 2
+- Send at 2024-12-27
+- 
 
 # Step 3: Kubernetes Application Security Checklist and implement 2-3 aspects in your manifest 
+## Base security hardening
+### Application design 
+### Service account
+### Pod-level securityContext recommendations
+### Container-level securityContext recommendations 
+### Role Based Access Control (RBAC) 
+### Image security
+### Network policies
+## Advanced security hardening 
+### Linux container security 
+### Runtime classes
 
