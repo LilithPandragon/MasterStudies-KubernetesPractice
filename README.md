@@ -2,6 +2,9 @@
 ```
 Group 01 Harald Beier Susanne Peer Patrick Prugger
 ```
+# Step 1
+## Branch Protection
+- 
 ## Description for Usage
 - WSL installed
 - Rancher desktop installed
