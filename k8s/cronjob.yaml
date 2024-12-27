@@ -16,7 +16,6 @@ spec:
             runAsNonRoot: true
             runAsUser: 1000
             runAsGroup: 3000
-            fsGroup: 2000
           containers:
           - name: producer
             image: ghcr.io/mcce2024/akkt1-g1-producer:latest
