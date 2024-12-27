@@ -11,7 +11,11 @@ spec:
     metadata:
       labels:
         app: rabbitmq
+        serviceAccount: rabbitmq-sa
     spec:
+      serviceAccountName: rabbitmq-sa
+      securityContext:
+        runAsNonRoot: true
       containers:
       - name: rabbitmq
         image: rabbitmq:3-management
