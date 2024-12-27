@@ -11,10 +11,10 @@ rabbitmq_port = process.env.RABBITMQ_PORT || '5672'
 rabbitmq_user = process.env.RABBITMQ_USER || 'guest'
 rabbitmq_pass = process.env.RABBITMQ_PASS || 'guest'
 
-console.log('rabbitmq_host:', rabbitmq_host);
-console.log('rabbitmq_port:', rabbitmq_port);
-console.log('rabbitmq_user:', rabbitmq_user);
-console.log('rabbitmq_pass:', rabbitmq_pass);
+//console.log('rabbitmq_host:', rabbitmq_host);
+//console.log('rabbitmq_port:', rabbitmq_port);
+//console.log('rabbitmq_user:', rabbitmq_user);
+//console.log('rabbitmq_pass:', rabbitmq_pass);
 
 const RABBITMQ_URL = `amqp://${rabbitmq_user}:${rabbitmq_pass}@${rabbitmq_host}:${rabbitmq_port}`
 
