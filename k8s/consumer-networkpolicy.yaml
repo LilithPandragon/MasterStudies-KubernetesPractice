@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: consumer-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: consumer
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - ports:
+      - protocol: TCP
+        port: 3000  # Web server port
+    - from:
+      - podSelector:
+          matchLabels:
+            app: rabbitmq
+      ports:
+        - protocol: TCP
+          port: 5672
+  egress:
+    - to:
+      - podSelector:
+          matchLabels:
+            app: rabbitmq
+      ports:
+        - protocol: TCP
+          port: 5672  # RabbitMQ AMQP port 
+    - to:
+      - namespaceSelector: {}
+      ports:
+        - protocol: UDP
+          port: 53    # DNS UDP port
+        - protocol: TCP
+          port: 53    # DNS TCP port 
