@@ -13,6 +13,7 @@ spec:
       template:
         spec:
           serviceAccountName: rabbitmq-producer-sa
+          automountServiceAccountToken: false
           securityContext:
             runAsNonRoot: true
             runAsUser: 1000

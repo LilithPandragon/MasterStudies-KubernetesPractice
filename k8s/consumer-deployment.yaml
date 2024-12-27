@@ -13,6 +13,7 @@ spec:
         app: consumer
     spec:
       serviceAccountName: consumer-sa
+      automountServiceAccountToken: false
       securityContext:
         runAsNonRoot: true
       containers:
