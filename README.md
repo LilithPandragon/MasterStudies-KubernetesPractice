@@ -9,7 +9,6 @@ Patrick Prugger
 ## Branch Protection
 > Activated but the rule from Github: *Your rules won't be enforced on this private repository until one of your organization's owners upgrades the account to GitHub Team or Enterprise.*
 
-
 ## Description for Usage
 - WSL installed
 - Rancher desktop installed
@@ -25,6 +24,10 @@ Patrick Prugger
 - Consumer uses JS for visualisation of JSON with minimal functionality (Refresh, Delete and a little extra because we love it if a plan is working)
 - K8S manifest includes the configuration Yamls for the different services
   
+
+## Architecture diagram
+![Architecture diagram](drawio.png)
+
 ## 12 Factor App 
 1. **Codebase:** github used as revision control. Dev and Main branches
 2. **Dependencies:** Explicitly declare and isolate dependencies
