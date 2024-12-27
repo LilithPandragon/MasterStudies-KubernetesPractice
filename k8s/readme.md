@@ -47,7 +47,7 @@ The credentials change with every deployment.
       ```
      
    - For Windows (PowerShell):
-      c
+     ```
       ./delete-deployment.ps1
      ```
       
