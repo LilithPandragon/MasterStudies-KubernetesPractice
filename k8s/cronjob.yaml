@@ -5,12 +5,17 @@ metadata:
   annotations:
     security.kubernetes.io/owner: "MCCE-G1"
     security.kubernetes.io/environment: "production"
+  labels:
+    app: producer
 spec:
   schedule: "*/1 * * * *"  # Run every minute
   concurrencyPolicy: Replace
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app: producer
         spec:
           serviceAccountName: rabbitmq-producer-sa
           automountServiceAccountToken: false
