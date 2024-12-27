@@ -2,6 +2,9 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: rabbitmq-producer
+  annotations:
+    security.kubernetes.io/owner: "MCCE-G1"
+    security.kubernetes.io/environment: "production"
 spec:
   schedule: "*/1 * * * *"  # Run every minute
   concurrencyPolicy: Replace
@@ -9,9 +12,27 @@ spec:
     spec:
       template:
         spec:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 3000
+            fsGroup: 2000
           containers:
           - name: producer
             image: ghcr.io/mcce2024/akkt1-g1-producer:latest
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+              readOnlyRootFilesystem: true
+            resources:
+              limits:
+                cpu: "200m"
+                memory: "256Mi"
+              requests:
+                cpu: "100m"
+                memory: "128Mi"
             env:
             - name: RABBITMQ_HOST
               value: "rabbitmq"
