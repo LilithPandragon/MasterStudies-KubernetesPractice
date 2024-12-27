@@ -142,7 +142,7 @@ app.get('/', (req, res) => {
             <script>
                 function refreshPage() {
                     const audio = document.getElementById('clickSound');
-                    audio.volume = 0.5;  // Set volume to 50% (0.5)
+                    audio.volume = 0.2;  // Set volume to 20% (0.2)
                     audio.play();
                     setTimeout(() => {
                         location.reload();
@@ -167,7 +167,7 @@ app.get('/', (req, res) => {
                 <div class="header-text">
                     <h1>AKTT1 G1 Consumer Dashboard</h1>
                     <h2>Beier, Peer, Prugger</h2>
-                    <h4 style="font-style: italic;">May the rose be with you.</h4>
+                    <h4 style="font-style: italic;">A part of Red Rose Inc.</h4>
                 </div>
             </div>
             <button class="refresh-button" onclick="refreshPage()">Refresh Messages</button>
