@@ -58,6 +58,9 @@ kubectl apply -f ./rabbitmq-secret.yaml
 kubectl apply -f ./rabbitmq-deployment.yaml
 kubectl apply -f ./rabbitmq-service.yaml
 
+Write-Host "Waiting for RabbitMQ pod to be ready..."
+kubectl wait --for=condition=ready pod -l app=rabbitmq --timeout=30s
+
 Write-Host "Applying CronJob as producer..."
 kubectl apply -f ./producer-serviceaccount.yaml
 kubectl apply -f ./producer.yaml

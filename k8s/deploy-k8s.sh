@@ -44,7 +44,7 @@ EOF
 echo "Applying Namespace..."
 kubectl apply -f ./namespace.yaml
 
-Write-Host "Setting context to mcce-g1..."
+echo "Setting context to mcce-g1..."
 kubectl config set-context --current --namespace=mcce-g1
 
 echo "Applying RabbitMQ deployment..."
@@ -52,6 +52,9 @@ kubectl apply -f ./rabbitmq-serviceaccount.yaml
 kubectl apply -f ./rabbitmq-secret.yaml
 kubectl apply -f ./rabbitmq-deployment.yaml
 kubectl apply -f ./rabbitmq-service.yaml
+
+echo "Waiting for RabbitMQ pod to be ready..."
+kubectl wait --for=condition=ready pod -l app=rabbitmq --timeout=30s
 
 echo "Applying CronJob as producer..."
 kubectl apply -f ./producer-serviceaccount.yaml
