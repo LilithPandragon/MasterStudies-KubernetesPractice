@@ -8,7 +8,12 @@ resources:
 - ../../base
 - rabbitmq-secret.yaml
 
+patches:
+- path: patches/service-ports.yaml
+
 configMapGenerator:
 - name: app-config
   literals:
   - ENVIRONMENT=prod
+  - RABBITMQ_HOST=rabbitmq.mcce-g1-prod
+  - RABBITMQ_PORT=5673

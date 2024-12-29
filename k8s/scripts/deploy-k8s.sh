@@ -58,6 +58,12 @@ kubectl wait --for=condition=ready pod -l app=rabbitmq --timeout=30s
 
 echo "Deployment completed!"
 
+if [[ $ENVIRONMENT == "test" ]]; then
+    kubectl config set-context --current --namespace=mcce-g1-test
+else
+    kubectl config set-context --current --namespace=mcce-g1-prod
+fi
+
 echo "Showing pods..."
 kubectl get pods
 

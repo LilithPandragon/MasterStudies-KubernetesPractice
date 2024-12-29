@@ -12,8 +12,12 @@ fi
 
 echo "Removing $ENVIRONMENT deployment..."
 
-echo "Setting context to mcce-g1..."
-kubectl config set-context --current --namespace=mcce-g1
+echo "Setting context to $ENVIRONMENT..."
+if [[ $ENVIRONMENT == "test" ]]; then
+    kubectl config set-context --current --namespace=mcce-g1-test
+else
+    kubectl config set-context --current --namespace=mcce-g1-prod
+fi
 
 echo "Deleting all resources using Kustomize..."
 kubectl delete -k "../overlays/$ENVIRONMENT"
