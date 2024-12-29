@@ -12,14 +12,16 @@
 ./deploy-k8s.ps1
 ```
 **The script performs the following tasks:**
+   - Creates a namespace `mcce-g1`
+   - Sets the context to the namespace `mcce-g1`
    - Generates RabbitMQ credentials and creates a secret file (`rabbitmq-secret.yaml`)
    - Deploys RabbitMQ, the Consumer service, and the Producer as a CronJob
+   - Deploys the necessary network policies
    - Displays running pods and services
 
 The generated credentials will be shown in the terminal at the end. Note them down for future use.
 The credentials change with every deployment.
 
-#########################################################################################
 
 ## *Service Communication*
 *RabbitMQ:*
@@ -37,7 +39,6 @@ The credentials change with every deployment.
    - Listens for messages from RabbitMQ
    - Exposes an HTTP service (Port: `8080`) via the LoadBalancer `consumer-service.yaml`
 
-#########################################################################################
 
 ## **Deleting the Configuration**
 *Execute the deletion script from:*
@@ -55,9 +56,10 @@ The credentials change with every deployment.
    - RabbitMQ Deployment, Secret, and Services
    - Producer (CronJob)
    - Consumer (Deployment and Service)
+   - Network Policies
+   - Namespace `mcce-g1`
 
-#########################################################################################
-
+## General Notes
 - *Simple Communication:* RabbitMQ serves as a message center between Producer & Consumer
 - *Configuration Changes:* Changes to the deployment strategy can be made in the corresponding
                           YAML files
