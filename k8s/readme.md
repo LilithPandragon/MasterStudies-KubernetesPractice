@@ -5,18 +5,19 @@
 
 -  For Linux:
 ```
-./deploy-k8s.sh
+./scripts/deploy-k8s.sh
 ```
 - For Windows:
 ```
-./deploy-k8s.ps1
+./scripts/deploy-k8s.ps1
 ```
 **The script performs the following tasks:**
-   - Creates a namespace `mcce-g1`
-   - Sets the context to the namespace `mcce-g1`
+   - Creates a namespace `mcce-g1-test` or `mcce-g1-prod`
+   - Sets the context to the namespace `mcce-g1-test` or `mcce-g1-prod`
    - Generates RabbitMQ credentials and creates a secret file (`rabbitmq-secret.yaml`)
    - Deploys RabbitMQ, the Consumer service, and the Producer as a CronJob
    - Deploys the necessary network policies
+   - Patches the deployment to use the overlays
    - Displays running pods and services
 
 The generated credentials will be shown in the terminal at the end. Note them down for future use.
@@ -27,29 +28,32 @@ The credentials change with every deployment.
 *RabbitMQ:*
    - RabbitMQ is started via the `rabbitmq-deployment.yaml` deployment.
      Credentials are obtained from the `rabbitmq-secret.yaml` secret.
-   - RabbitMQ has two services:
+   - RabbitMQ service layout:
+   - Test
      - **AMQP Port (5672):** For messages between Producer and Consumer
      - **Management UI (15672):** Accessible via `rabbitmq-management` on the host on port 15672
+   - Prod
+     - **AMQP Port (5673):** For messages between Producer and Consumer
 
 *Producer (CronJob):*
    - Runs every minute according to `cronjob.yaml`
-   - Produces messages and sends them to RabbitMQ (Hostname: `rabbitmq`, Port: `5672`)
+   - Produces messages and sends them to RabbitMQ (Hostname: `rabbitmq`, Test Port: `5672`, Prod Port: `5673`)
 
 *Consumer (Deployment and Service):*
    - Listens for messages from RabbitMQ
-   - Exposes an HTTP service (Port: `8080`) via the LoadBalancer `consumer-service.yaml`
+   - Exposes an HTTP service (Test Port: `8080`, Prod Port: `8081`) via the LoadBalancer `consumer-service.yaml`
 
 
 ## **Deleting the Configuration**
 *Execute the deletion script from:*
    - For Linux/MacOS:
      ```
-     ./delete-deployment.sh
+     ./scripts/delete-deployment.sh
       ```
      
    - For Windows (PowerShell):
      ```
-      ./delete-deployment.ps1
+      ./scripts/delete-deployment.ps1
      ```
       
 *The script removes:*
@@ -57,7 +61,7 @@ The credentials change with every deployment.
    - Producer (CronJob)
    - Consumer (Deployment and Service)
    - Network Policies
-   - Namespace `mcce-g1`
+   - Namespace `mcce-g1-test` or `mcce-g1-prod`
 
 ## General Notes
 - *Simple Communication:* RabbitMQ serves as a message center between Producer & Consumer

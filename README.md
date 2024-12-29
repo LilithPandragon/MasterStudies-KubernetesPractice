@@ -15,9 +15,9 @@ Patrick Prugger
 - IDE of Choice
 - Project pulled
 - Rancher desktop up and running
-- To start the application you just have to run ./deploy-k8s.ps1
-- To delete the application you just have to run ./delete-deployment.ps1
-- 
+- To start the deployment run ./k8s/scripts/deploy-k8s.ps1
+- To delete the deployment run ./k8s/scripts/delete-deployment.ps1
+
 ## Description of functionality
 - Producer generates JSON with datetime in UTC
 - RabbitMQ is used as messaging queue
@@ -100,4 +100,18 @@ So all commits are now in the same pull request.
 
 # Step 4: Templating (optional)
 Lessons learned:
--To avoid this problem for this step we have created a new branch called "templating".
+- To avoid this problem for this step we have created a new branch called "templating".
+
+
+## Changes for templating
+- Changed the k8s folder layout in a base folder and created an overlays folder for the test and production environment
+- Moved the scripts to a scripts folder
+- Created patches for prod and test environment
+- prod and test are divided in different namespaces
+- prod and test can be deployed on the same cluster now
+- changed the deployment scripts to use the overlays
+- changed the drawio file because we have a new port on prod
+
+## Pull-Request for Step 4
+- Sent to Group 2
+- TBD
