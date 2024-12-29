@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: consumer
-  namespace: mcce-g1
 spec:
   replicas: 1
   selector:
