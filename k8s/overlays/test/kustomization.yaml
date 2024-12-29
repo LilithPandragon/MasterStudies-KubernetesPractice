@@ -9,12 +9,8 @@ resources:
 - rabbitmq-secret.yaml
 - patches/rabbitmq-management-service.yaml
 
-patches:
-- path: patches/service-ports.yaml
-
 configMapGenerator:
 - name: app-config
   literals:
   - ENVIRONMENT=test
-  - RABBITMQ_HOST=rabbitmq.mcce-g1-test
-  - RABBITMQ_PORT=5672
+  - CONSUMER_PORT=3000
