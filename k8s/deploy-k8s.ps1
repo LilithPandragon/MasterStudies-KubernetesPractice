@@ -47,6 +47,9 @@ data:
 # Write the YAML content to file
 $secretYaml | Out-File -FilePath "./rabbitmq-secret.yaml" -Encoding UTF8 -Force
 
+Write-Host "Applying Namespace..."
+kubectl apply -f ./namespace.yaml
+
 Write-Host "Applying RabbitMQ deployment..."
 # Create the ServiceAccount
 kubectl apply -f ./rabbitmq-serviceaccount.yaml

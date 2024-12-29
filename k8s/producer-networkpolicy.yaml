@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: producer-network-policy
+  namespace: mcce-g1
 spec:
   podSelector:
     matchLabels:

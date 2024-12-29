@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: consumer
+  namespace: mcce-g1
   labels:
     app: consumer
     serviceAccount: consumer-sa

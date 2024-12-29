@@ -41,6 +41,9 @@ data:
   password: $PASSWORD_B64
 EOF
 
+echo "Applying Namespace..."
+kubectl apply -f ./namespace.yaml
+
 echo "Applying RabbitMQ deployment..."
 kubectl apply -f ./rabbitmq-serviceaccount.yaml
 kubectl apply -f ./rabbitmq-secret.yaml

@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: rabbitmq-producer
+  namespace: mcce-g1
   annotations:
     security.kubernetes.io/owner: "MCCE-G1"
     security.kubernetes.io/environment: "production"

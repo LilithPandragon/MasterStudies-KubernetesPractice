@@ -24,4 +24,7 @@ kubectl delete -f ./rabbitmq-networkpolicy.yaml
 kubectl delete -f ./consumer-networkpolicy.yaml
 kubectl delete -f ./producer-networkpolicy.yaml
 
+Write-Host "Namespace removed!"
+kubectl delete -f ./namespace.yaml
+
 Write-Host "Deployment removed!" 
