@@ -1,6 +1,6 @@
-# Get and script directory
+# Get script directory
 $SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
-Set-Location $scriptPath
+Set-Location $SCRIPT_DIR
 
 # Add prompt for rebuilding containers
 $REBUILD = Read-Host "Do you want to rebuild the containers? (y/n)"
@@ -12,9 +12,7 @@ if ($REBUILD -eq 'y' -or $REBUILD -eq 'Y') {
     Write-Host "Skipping container rebuild..."
 }
 
-#Change script directory
-$SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
-Set-Location $SCRIPT_DIR
+# Remove redundant directory change
 Write-Host "Current directory: $SCRIPT_DIR"
 
 Write-Host "Generating RabbitMQ credentials..."
@@ -49,6 +47,9 @@ $secretYaml | Out-File -FilePath "./rabbitmq-secret.yaml" -Encoding UTF8 -Force
 
 Write-Host "Applying Namespace..."
 kubectl apply -f ./namespace.yaml
+
+Write-Host "Setting context to mcce-g1..."
+kubectl config set-context --current --namespace=mcce-g1
 
 Write-Host "Applying RabbitMQ deployment..."
 # Create the ServiceAccount

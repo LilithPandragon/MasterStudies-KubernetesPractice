@@ -4,6 +4,9 @@ Set-Location $scriptPath
 
 Write-Host "Removing deployment..."
 
+Write-Host "Setting context to mcce-g1..."
+kubectl config set-context --current --namespace=mcce-g1
+
 Write-Host "Deleting RabbitMQ deployment..."
 kubectl delete -f ./rabbitmq-secret.yaml
 kubectl delete -f ./rabbitmq-deployment.yaml

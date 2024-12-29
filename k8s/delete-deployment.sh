@@ -5,6 +5,9 @@ cd "$SCRIPT_DIR"
 
 echo "Removing deployment..."
 
+echo "Setting context to mcce-g1..."
+kubectl config set-context --current --namespace=mcce-g1
+
 echo "Deleting RabbitMQ deployment..."
 kubectl delete -f ./rabbitmq-secret.yaml
 kubectl delete -f ./rabbitmq-deployment.yaml

@@ -44,6 +44,9 @@ EOF
 echo "Applying Namespace..."
 kubectl apply -f ./namespace.yaml
 
+Write-Host "Setting context to mcce-g1..."
+kubectl config set-context --current --namespace=mcce-g1
+
 echo "Applying RabbitMQ deployment..."
 kubectl apply -f ./rabbitmq-serviceaccount.yaml
 kubectl apply -f ./rabbitmq-secret.yaml
