@@ -14,8 +14,8 @@ fi
 read -p "Do you want to rebuild the containers? (y/n): " REBUILD
 if [[ $REBUILD =~ ^[Yy]$ ]]; then
     echo "Building containers..."
-    ../consumer/build.sh
-    ../producer/build.sh
+    ../../consumer/build.sh
+    ../../producer/build.sh
 else
     echo "Skipping container rebuild..."
 fi

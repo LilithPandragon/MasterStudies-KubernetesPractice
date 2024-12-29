@@ -13,8 +13,10 @@ if ($ENVIRONMENT -ne 'test' -and $ENVIRONMENT -ne 'prod') {
 $REBUILD = Read-Host "Do you want to rebuild the containers? (y/n)"
 if ($REBUILD -eq 'y' -or $REBUILD -eq 'Y') {
     Write-Host "Building containers..."
-    ../consumer/build.ps1
-    ../producer/build.ps1
+    ../../consumer/build.ps1
+    Set-Location $SCRIPT_DIR
+    ../../producer/build.ps1
+    Set-Location $SCRIPT_DIR
 } else {
     Write-Host "Skipping container rebuild..."
 }
