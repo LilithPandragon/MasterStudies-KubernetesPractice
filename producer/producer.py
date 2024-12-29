@@ -21,14 +21,19 @@ parameters = pika.ConnectionParameters(
 
 def try_connect(parameters, max_retries=30, retry_delay=2):
     """Attempt to connect to RabbitMQ with retries"""
+    print(f"Starting connection attempts to RabbitMQ at {parameters.host}:{parameters.port}")
     for attempt in range(max_retries):
         try:
+            print(f"Connection attempt {attempt + 1}/{max_retries}...")
             connection = pika.BlockingConnection(parameters)
+            print("Successfully connected to RabbitMQ!")
             return connection
-        except pika.exceptions.AMQPConnectionError as e:
+        except Exception as e:  # Catch all exceptions
             if attempt == max_retries - 1:  # Last attempt
+                print(f"Final attempt failed: {type(e).__name__}: {str(e)}")
                 raise  # Re-raise the last exception
-            print(f"Connection attempt {attempt + 1} failed, retrying in {retry_delay} seconds...")
+            print(f"Connection attempt {attempt + 1} failed: {type(e).__name__}: {str(e)}")
+            print(f"Retrying in {retry_delay} seconds...")
             time.sleep(retry_delay)
 
 try:
