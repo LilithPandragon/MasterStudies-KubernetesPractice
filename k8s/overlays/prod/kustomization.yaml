@@ -12,7 +12,10 @@ patches:
 - path: patches/service-ports.yaml
 - path: patches/consumer-ports.yaml
 - path: patches/consumer-env.yaml
-- path: patches/networkpolicy.yaml
+- path: patches/producer-env.yaml
+- path: patches/rabbitmq-networkpolicy.yaml
+- path: patches/consumer-networkpolicy.yaml
+- path: patches/producer-networkpolicy.yaml
 
 configMapGenerator:
 - name: app-config

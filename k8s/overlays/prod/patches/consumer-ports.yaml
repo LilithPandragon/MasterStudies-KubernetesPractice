@@ -5,6 +5,8 @@ metadata:
 spec:
   $patch: replace
   type: LoadBalancer
+  selector:
+    app: consumer
   ports:
     - name: http
       port: 8081
