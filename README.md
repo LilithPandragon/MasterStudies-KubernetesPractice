@@ -94,3 +94,7 @@ The deployment includes NetworkPolicies to control pod-to-pod communication:
 - Sent at 2024-12-27
 
 # Step 4: Templating (optional)
+=======
+To start the application you just have to start ./deploy-k8s.ps1
+
+
