@@ -53,3 +53,8 @@ spec:
             secretKeyRef:
               name: rabbitmq-secret
               key: password
+        - name: CONSUMER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: CONSUMER_PORT

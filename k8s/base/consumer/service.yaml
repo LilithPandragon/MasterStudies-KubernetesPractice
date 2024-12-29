@@ -12,10 +12,7 @@ spec:
   selector:
     app: consumer
   ports:
-  - port: 8080
-    targetPort: 3000
-    # Explicitly name the port for better visibility
-    name: http
-    # Specify protocol explicitly
-    protocol: TCP
+    - name: http
+      port: 8080
+      targetPort: 3000
   type: LoadBalancer
