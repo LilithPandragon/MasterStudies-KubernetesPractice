@@ -71,6 +71,9 @@ app.post('/clear-messages', (req, res) => {
 });
 
 app.get('/', (req, res) => {
+    // Determine environment based on RabbitMQ port
+    const environmentText = rabbitmq_port === '5672' ? 'Production Deployment' : 'Test Deployment';
+    
     res.send(`
         <!DOCTYPE html>
         <html>
@@ -138,6 +141,14 @@ app.get('/', (req, res) => {
                 .delete-button:hover {
                     background-color: #cc0000;
                 }
+                .environment-label {
+                    background-color: #007bff;
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 3px;
+                    display: inline-block;
+                    margin-bottom: 10px;
+                }
             </style>
             <script>
                 function refreshPage() {
@@ -168,6 +179,7 @@ app.get('/', (req, res) => {
                     <h1>AKTT1 G1 Consumer Dashboard</h1>
                     <h2>Beier, Peer, Prugger</h2>
                     <h4 style="font-style: italic;">A part of Red Rose Inc.</h4>
+                    <div class="environment-label">${environmentText}</div>
                 </div>
             </div>
             <button class="refresh-button" onclick="refreshPage()">Refresh Messages</button>
