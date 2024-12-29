@@ -1,0 +1,47 @@
+# Consumer NetworkPolicy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: consumer-network-policy
+spec:
+  egress:
+    - to:
+      - podSelector:
+          matchLabels:
+            app: rabbitmq
+      ports:
+        - protocol: TCP
+          port: 5673  # Changed RabbitMQ port for prod
+---
+# RabbitMQ NetworkPolicy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: rabbitmq-network-policy
+spec:
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: consumer
+      - podSelector:
+          matchLabels:
+            app: producer
+      ports:
+        - protocol: TCP
+          port: 5673  # Changed AMQP port for prod
+---
+# Producer NetworkPolicy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: producer-network-policy
+spec:
+  egress:
+    - to:
+      - podSelector:
+          matchLabels:
+            app: rabbitmq
+      ports:
+        - protocol: TCP
+          port: 5673  # Changed RabbitMQ port for prod 

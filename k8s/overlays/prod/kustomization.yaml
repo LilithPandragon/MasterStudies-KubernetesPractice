@@ -10,10 +10,12 @@ resources:
 
 patches:
 - path: patches/service-ports.yaml
+- path: patches/consumer-ports.yaml
+- path: patches/consumer-env.yaml
+- path: patches/networkpolicy.yaml
 
 configMapGenerator:
 - name: app-config
   literals:
   - ENVIRONMENT=prod
-  - RABBITMQ_HOST=rabbitmq.mcce-g1-prod
-  - RABBITMQ_PORT=5673
+  - CONSUMER_PORT=3000

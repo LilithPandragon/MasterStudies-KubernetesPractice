@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: rabbitmq
 spec:
+  $patch: replace
   ports:
     - name: amqp
       port: 5673
