@@ -1,0 +1,15 @@
+﻿apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: mcce-g1
+
+resources:
+- ../../base
+- rabbitmq-secret.yaml
+- patches/rabbitmq-management-service.yaml
+
+# Test-specific configurations
+configMapGenerator:
+- name: app-config
+  literals:
+  - ENVIRONMENT=test

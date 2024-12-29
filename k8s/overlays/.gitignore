@@ -1,0 +1,2 @@
+prod/rabbitmq-secret.yaml
+test/rabbitmq-secret.yaml
