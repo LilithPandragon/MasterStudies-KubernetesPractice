@@ -1,9 +1,10 @@
 ﻿apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: mcce-g1
+namespace: mcce-g1-prod
 
 resources:
+- namespace.yaml
 - ../../base
 - rabbitmq-secret.yaml
 

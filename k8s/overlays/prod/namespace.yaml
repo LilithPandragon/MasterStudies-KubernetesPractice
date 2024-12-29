@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: mcce-g1
+  name: mcce-g1-prod 

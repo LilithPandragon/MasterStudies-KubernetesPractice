@@ -2,7 +2,6 @@
 kind: Kustomization
 
 resources:
-- namespace.yaml
 - consumer/deployment.yaml
 - consumer/service.yaml
 - consumer/networkpolicy.yaml
