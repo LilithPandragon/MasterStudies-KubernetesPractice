@@ -1,0 +1,57 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: rabbitmq-producer
+  annotations:
+    security.kubernetes.io/owner: "MCCE-G1"
+    security.kubernetes.io/environment: "production"
+  labels:
+    app: producer
+spec:
+  schedule: "*/1 * * * *"  # Run every minute
+  concurrencyPolicy: Replace
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: producer
+        spec:
+          serviceAccountName: rabbitmq-producer-sa
+          automountServiceAccountToken: false
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 3000
+          containers:
+          - name: producer
+            image: ghcr.io/mcce2024/akkt1-g1-producer:latest
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
+              readOnlyRootFilesystem: true
+            resources:
+              limits:
+                cpu: "200m"
+                memory: "256Mi"
+              requests:
+                cpu: "100m"
+                memory: "128Mi"
+            env:
+            - name: RABBITMQ_HOST
+              value: "rabbitmq"
+            - name: RABBITMQ_PORT
+              value: "5672"
+            - name: RABBITMQ_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: username
+            - name: RABBITMQ_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: password
+          restartPolicy: OnFailure 

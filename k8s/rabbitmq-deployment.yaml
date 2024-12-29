@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+        serviceAccount: rabbitmq-sa
+    spec:
+      serviceAccountName: rabbitmq-sa
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 999    # RabbitMQ group
+        runAsUser: 999  # RabbitMQ user
+        runAsGroup: 999 # RabbitMQ group
+        runAsNonRoot: true
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:3-management
+        ports:
+        - containerPort: 5672  # AMQP port
+        - containerPort: 15672 # Management UI port
+        env:
+        - name: RABBITMQ_DEFAULT_USER
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: username
+        - name: RABBITMQ_DEFAULT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: password
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL

@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      serviceAccountName: consumer-sa
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+      containers:
+      - name: consumer
+        image: ghcr.io/mcce2024/akkt1-g1-consumer:latest
+        # Add container security context
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+          readOnlyRootFilesystem: true
+        # Add resource limits and requests
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+        ports:
+        - containerPort: 3000
+        env:
+        - name: RABBITMQ_HOST
+          value: "rabbitmq"
+        - name: RABBITMQ_PORT
+          value: "5672"
+        - name: RABBITMQ_USER
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: username
+        - name: RABBITMQ_PASS
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: password
