@@ -4,6 +4,8 @@ metadata:
   name: rabbitmq
 spec:
   $patch: replace
+  selector:
+    app: rabbitmq
   ports:
     - name: amqp
       port: 5673

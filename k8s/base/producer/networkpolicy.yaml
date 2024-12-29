@@ -5,7 +5,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: rabbitmq-producer
+      app: producer
   policyTypes:
     - Egress
   egress:

@@ -32,7 +32,7 @@ spec:
             app: consumer
       - podSelector:
           matchLabels:
-            app: rabbitmq-producer
+            app: producer
       ports:
         - protocol: TCP
           port: 5672 
