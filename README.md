@@ -30,17 +30,17 @@ Patrick Prugger
 
 ## 12 Factor App 
 1. **Codebase:** github used as revision control. Dev and Main branches
-2. **Dependencies:** Explicitly declare and isolate dependencies
+2. **Dependencies:** node:16-alpine for consumer and python:3.9-slim for producer, declaration in Dockerfiles
 3. **Config:** Store config in the environment
 4. **Backing services:** Treat backing services as attached resources
-5. **Build, release, run:** Strictly separate build and run stages
-6. **Processes:** Execute the app as one or more stateless processes
-7. **Port binding:** Export services via port binding
+5. **Build, release, run:** Different overlays generated in K8S for test and producer.
+6. **Processes:** 3 stateless processes producer, consumer and RabbitMQ
+7. **Port binding:** Through 3 different networkpolicy.yaml for producer,consumer and rabbitmq
 8. **Concurrency:** Scale out via the process model
-9. **Disposability:** Maximize robustness with fast startup and graceful shutdown
-10. **Dev/prod parity:** Keep development, staging, and production as similar as possible
-11. **Logs:** Treat logs as event streams
-12. **Admin processes:** Run admin/management tasks as one-off processes
+9. **Disposability:** Will be managed through rancher and the scripts delete and deploy in bash in powershell
+10. **Dev/prod parity:** Base and overlay folder. Additional different github branches 
+11. **Logs:** Treat logs as event streams 
+12. **Admin processes:** Adminmanagement from rabbitmq can be ascessed 
 
 ## Pull-Request for Step 2
 - Sent to Group 2
