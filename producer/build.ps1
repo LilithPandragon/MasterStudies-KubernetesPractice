@@ -30,7 +30,7 @@ if (-not $isLoggedIn) {
         Write-Host "Could not read GitHub token from '$TOKEN_PATH' file"
         exit 1
     }
-    echo $GITHUB_TOKEN.Trim() | docker login ghcr.io -u mcce2024 --password-stdin
+    Write-Host $GITHUB_TOKEN.Trim() | docker login ghcr.io -u mcce2024 --password-stdin
 }
 
 Write-Host "Building ${REGISTRY}/${IMAGE_NAME}:${VERSION}"
