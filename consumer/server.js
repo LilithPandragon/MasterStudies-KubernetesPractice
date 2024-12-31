@@ -72,7 +72,7 @@ app.post('/clear-messages', (req, res) => {
 
 app.get('/', (req, res) => {
     // Determine environment based on RabbitMQ port
-    const environmentText = rabbitmq_port === '5672' ? 'Production Deployment' : 'Test Deployment';
+    const environmentText = rabbitmq_port === '5672' ? 'Test Deployment' : 'Production Deployment';
     
     res.send(`
         <!DOCTYPE html>
