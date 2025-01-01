@@ -5,7 +5,7 @@ Used libaries and coding language
 - [nodemon 3.0.3](https://www.npmjs.com/package/nodemon/v/3.0.3)
 
 Used docker image from dockerhub
-- [node:16-alpine]([https://www.npmjs.com/package/nodemon/v/3.0.3](https://hub.docker.com/_/node/)
+- [node_16-alpine]([https://www.npmjs.com/package/nodemon/v/3.0.3](https://hub.docker.com/_/node/)
 
 ## Function:
 -  server.js establish a connection to the rabbitmq and the `async function connectQueue()` retries 10 times to establish a connection
