@@ -1,8 +1,24 @@
-#### **Steps to Build and Run the Configuration**
+# Consumer - Setup 
+Used libaries and coding language
+- [amqplib 0.10.3](https://www.npmjs.com/package/amqplib/v/0.10.3) 
+- [express 4.18.2](https://www.npmjs.com/package/express/v/4.18.2)
+- [nodemon 3.0.3](https://www.npmjs.com/package/nodemon/v/3.0.3)
+Used docker image from dockerhub
+- [node:16-alpine]([https://www.npmjs.com/package/nodemon/v/3.0.3](https://hub.docker.com/_/node/))
+### **Steps to Build and Run the Configuration**
 
 *Build and Push the Docker Image*:
-   - Execute the `build.sh` script:
-     bash build.sh
+- navigate to the consumer directory
+- run the deployment script
+
+   - Linux/MacOS:
+   ```
+   ./build.sh
+   ```
+   - Windows (PowerShell):
+   ```
+   ./build.ps1
+   ```
  
    - This script:
      - uses the current timestamp as the image version
@@ -14,10 +30,11 @@
      docker run -p 3000:3000 ghcr.io/mcce2024/akkt1-g1-consumer:latest
   
    - application will be accessible at `http://localhost:3000`
+> Action is no longer needed because there is a github action for this `build (consumer)`
+
 
 ---
-
-#### **Service Communication Overview**
+### **Service Communication Overview**
 
 - *RabbitMQ Integration*:
   - RabbitMQ connection details are dynamically configured using environment variables:
@@ -50,7 +67,7 @@
 ---
 
 #### **Simplified Workflow**
-Run the `build.sh` script to build and push the Docker image
+Run the `build.sh` or `build.ps1`script to build and push the Docker image
 Start the container using the `docker run` command
 Access the web dashboard to view and manage messages
 
