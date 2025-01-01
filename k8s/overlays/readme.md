@@ -112,5 +112,42 @@ Provides the RabbitMQ credentials for production.
 
 ---
 
+# Overlays Test 
+
+### kustomization.yaml
+
+Defines the resources and configurations for the `test` environment.
+
+- **Namespace**:
+  - all resources are deployed in the `mcce-g1-test` namespace
+
+- **Resources**:
+  - includes base manifests (`../../base`)
+  - adds environment specific resources such as `namespace.yaml`, `rabbitmq-secret.yaml`, and `rabbitmq-management-service.yaml`
+
+- **ConfigMapGenerator**:
+  - creates a `ConfigMap` with test specific configurations:
+    - `ENVIRONMENT=test`
+    - `CONSUMER_PORT=3000`
+
+### **2. namespace.yaml**
+
+Creates a dedicated namespace for the test environment.
+
+- Name: `mcce-g1-test`
+
+---
+
+### rabbitmq-management-service.yaml
+
+Exposes the RabbitMQ management interface for the test environment.
+
+- **Type**: LoadBalancer service to provide external access
+- **Ports**:
+  - exposes port `15672` for RabbitMQ management interface
+- **Selector**:
+  - targets pods with the label `app: rabbitmq`
+
+
 
 

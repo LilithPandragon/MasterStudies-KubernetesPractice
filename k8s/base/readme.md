@@ -1,10 +1,10 @@
 ## Overview of base configurations
 
-# Consumer
+# Consumer Configurations
 
 ### deployment.yaml
 
-Defines the deployment for the consumer application.
+Defines the deployment for consumer application.
 
 - **Resource Limits and Security:**
   - Container runs with non-root permissions (`runAsNonRoot: true`)
@@ -15,26 +15,26 @@ Defines the deployment for the consumer application.
   - CPU and memory are restricted (max. 500m CPU and 512Mi memory)
 
 - **ServiceAccount:**
-  - Uses `consumer-sa` and disables automatic token mounting
+  - uses `consumer-sa` and disables automatic token mounting
 
 - **Environment Variables:**
   - connects to RabbitMQ (`RABBITMQ_HOST`, `RABBITMQ_PORT`, `RABBITMQ_USER`, `RABBITMQ_PASS`)
   - port is loaded from a ConfigMap (`CONSUMER_PORT`)
 
 - **Port:**
-  - The container exposes port 3000 for the service.
+  - container exposes port 3000 for the service
 
 ---
 
 ### networkpolicy.yaml
 
-Controls network access for the Consumer application.
+Controls network access for consumer application.
 
 - **PodSelector:**
   - applies to pods with the label `app: consumer`
 
 - **Ingress (Incoming Traffic):**
-  - allows TCP traffic on port 3000 (from the web server)
+  - allows TCP traffic on port 3000 (from web server)
   - allows communication from RabbitMQ pods (port 5672)
 
 - **Egress (Outgoing Traffic):**
@@ -45,10 +45,10 @@ Controls network access for the Consumer application.
 
 ### service.yaml
 
-Creates a service to make the Consumer accessible.
+Creates a service to make consumer accessible.
 
 - **Type:** `LoadBalancer`
-  - The service is externally accessible
+  - service is externally accessible
 
 - **Ports:**
   - Port 8080 is the external access point
@@ -56,17 +56,17 @@ Creates a service to make the Consumer accessible.
 
 - **Labels and Annotations:**
   - **Labels:**
-    - `app: consumer`: links to the Consumer pod
-    - `serviceAccount: consumer-sa`: indicates its connection to the ServiceAccount
+    - `app: consumer`: links to consumer pod
+    - `serviceAccount: consumer-sa`: indicates its connection to ServiceAccount
   - **Annotations:**
-    - `security.kubernetes.io/owner`: marks the owner (e.g., "MCCE-G1")
-    - `security.kubernetes.io/environment`: marks the environment (e.g., "production" - prod)
+    - `security.kubernetes.io/owner`: marks owner (e.g., "MCCE-G1")
+    - `security.kubernetes.io/environment`: marks environment (e.g., "production" - prod)
 
 ---
 
 ### serviceaccount.yaml
 
-Creates a ServiceAccount for the Consumer.
+Creates a ServiceAccount for consumer.
 
 - **Name:** `consumer-sa`.
 
@@ -78,13 +78,12 @@ Creates a ServiceAccount for the Consumer.
 
 # Producer
 
-
 ### deployment.yaml
 
-Defines the CronJob for the producer application.
+Defines the CronJob for producer application.
 
 - **Schedule**:
-  - runs every minute as specified by the cron expression `"*/1 * * * *"`
+  - runs every minute as specified by cron expression `"*/1 * * * *"`
 
 - **Concurrency Policy**:
   - Ensures only one job runs at a time (`Replace`)
@@ -106,13 +105,13 @@ Defines the CronJob for the producer application.
   - credentials are securely sourced from a Kubernetes Secret (`rabbitmq-secret`)
 
 - **Restart Policy**:
-  - The job restarts only on failure (`OnFailure`)
+  - the job restarts only on failure (`OnFailure`)
 
 ---
 
 ### networkpolicy.yaml
 
-Controls egress traffic from the Producer application.
+Controls egress traffic from producer application.
 
 - **PodSelector**:
   - targets pods with the label `app: producer`
@@ -127,7 +126,7 @@ Restricts the producer's outgoing connections to enhance security while ensuring
 ---
 ### serviceaccount.yaml
 
-Defines a dedicated ServiceAccount for the Producer application.
+Defines a dedicated ServiceAccount for producer application.
 
 - **Name**:
   - `rabbitmq-producer-sa`
@@ -158,10 +157,10 @@ Deploys RabbitMQ with a secure setup.
 
 - **Ports**:
   - exposes port 5672 for AMQP communication
-  - exposes port 15672 for the management interface
+  - exposes port 15672 for management interface
 
 - **Environment Variables**:
-  - uses `RABBITMQ_DEFAULT_USER` and `RABBITMQ_DEFAULT_PASS` to configure the default credentials
+  - uses `RABBITMQ_DEFAULT_USER` and `RABBITMQ_DEFAULT_PASS` to configure default credentials
   - credentials are securely sourced from the `rabbitmq-secret`
 
 ---
@@ -171,7 +170,7 @@ Deploys RabbitMQ with a secure setup.
 Controls ingress and egress traffic for RabbitMQ.
 
 - **PodSelector**:
-  - targets pods with the label `app: rabbitmq`
+  - targets pods with label `app: rabbitmq`
 
 - **Ingress Rules**:
   - allows communication from pods with labels:
@@ -203,13 +202,13 @@ Defines the structure for RabbitMQ credentials.
 Creates a service to expose RabbitMQ internally within the cluster.
 
 - **Type**:
-  - `ClusterIP`: Limits access to within the Kubernetes cluster
+  - `ClusterIP`: limits access to within Kubernetes cluster
 
 - **Ports**:
   - exposes port 5672 for AMQP communication
 
 - **Selector**:
-  - targets pods with the label `app: rabbitmq`
+  - targets pods with label `app: rabbitmq`
 
 ---
 
@@ -222,8 +221,8 @@ Defines a ServiceAccount for RabbitMQ
 
 - **Annotations**:
   - disables automatic token mounting (`automount-service-account-token: false`)
-  - marks the owner (`security.kubernetes.io/owner: MCCE-G1`)
-  - specifies the environment (`security.kubernetes.io/environment: production`)
+  - marks owner (`security.kubernetes.io/owner: MCCE-G1`)
+  - specifies environment (`security.kubernetes.io/environment: production`)
 
 ---
 
@@ -256,11 +255,11 @@ resources:
 ```
 
 **API Version and Kind**:
-   - `apiVersion: kustomize.config.k8s.io/v1beta1`: specifies the version of Kustomize being used
-   - `kind: Kustomization`: declares the type of the file as a Kustomize configuration
+   - `apiVersion: kustomize.config.k8s.io/v1beta1`: specifies version of Kustomize being used
+   - `kind: Kustomization`: declares type of the file as a Kustomize configuration
 
 **Resources**:
-   - lists all the Kubernetes manifest files that are part of the base configuration
+   - lists all Kubernetes manifest files that are part of the base configuration
    - **Consumer Resources**:
      - `consumer/deployment.yaml`: defines deployment for consumer application
      - `consumer/service.yaml`: creates a service to expose consumer application
