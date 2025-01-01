@@ -24,6 +24,28 @@ Patrick Prugger
 - Consumer uses JS for visualisation of JSON with minimal functionality (Refresh, Delete and a little extra because we love it if a plan is working)
 - K8S manifest includes the configuration Yamls for the different services
   
+### Directory Structure
+
+```plaintext
+AKTT1-GROUP1-K8S/
+|
+|-- consumer/               # Source code consumer application
+|-- producer/               # Source code producer application
+|-- k8s/                    # Kubernetes configurations
+|   |-- base/               
+|       |-- consumer/       # resources (consumer)
+|           |-- deployment.yaml
+|           |-- networkpolicy.yaml
+|           |-- service.yaml
+|           |-- serviceaccount.yaml
+|       |-- producer/       # resources (producer)
+|       |-- rabbitmq/       # resources (RabbitMQ)
+|       |-- kustomization.yaml
+|   |-- overlays/           # Environment configurations (prod/test)
+|-- scripts/                # Helper scripts
+|-- README.md               # You are here 😊 
+```
+
 
 ## Architecture diagram
 ![Architecture diagram](drawio.png)

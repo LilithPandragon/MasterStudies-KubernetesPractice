@@ -15,7 +15,7 @@
   
    - application will be accessible at `http://localhost:3000`
 
-#########################################################################################
+---
 
 #### **Service Communication Overview**
 
@@ -47,7 +47,7 @@
       ```
       npm run dev
       ```
-#########################################################################################
+---
 
 #### **Simplified Workflow**
 Run the `build.sh` script to build and push the Docker image

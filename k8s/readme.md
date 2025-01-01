@@ -47,12 +47,12 @@ The credentials change with every deployment.
 ## **Deleting the Configuration**
 *Execute the deletion script from:*
    - For Linux/MacOS:
-     ```
+     ```bash
      ./scripts/delete-deployment.sh
       ```
      
    - For Windows (PowerShell):
-     ```
+     ```bash
       ./scripts/delete-deployment.ps1
      ```
       
