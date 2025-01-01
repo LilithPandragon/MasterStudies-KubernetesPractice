@@ -134,9 +134,9 @@ AKTT1-GROUP1-K8S/
    - Resource limits enforced
    -  *Description*: Defines CPU and memory usage limits for each container.
    -  *Mitigated Attacks*:
-     -  *Denial of Service (DoS)*: Prevents resource exhaustion caused by malicious or misbehaving containers.
-     -  *Cross-Container Impact*: Ensures a single container cannot monopolize node resources, maintaining stability for other workloads.
-     -  *Unpredictable Behavior*: Helps avoid performance degradation due to over-consumption of resources.
+     - *Denial of Service (DoS)*: Prevents resource exhaustion caused by malicious or misbehaving containers.
+     - *Cross-Container Impact*: Ensures a single container cannot monopolize node resources, maintaining stability for other workloads.
+     - *Unpredictable Behavior*: Helps avoid performance degradation due to over-consumption of resources.
    - Latest base images used
    - *Description*: Ensures containers are built using the latest, patched versions of base images.
    - *Mitigated Attacks*:
