@@ -125,6 +125,10 @@ AKTT1-GROUP1-K8S/
        - *Improper File Permissions*: Ensures the container and its processes cannot access files they should not.
        - *Cross-Container Attacks*: Prevents access to shared volumes or directories between containers without proper permissions.
        - *Privilege Mismanagement*: Avoids the misuse of root UID or default group IDs that might unintentionally have elevated permissions.
+> Through defining a robust Pod Security Context, we try to achieve:
+> - Minimize privilege-related vulnerabilities.
+> - Harden our containers against tampering and exploitation.
+> - Promote compliance with security best practices in containerized environments.
 
 2. **Container Security:**
    - Resource limits enforced
