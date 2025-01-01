@@ -18,8 +18,8 @@ Defines the deployment for the consumer application.
   - Uses `consumer-sa` and disables automatic token mounting
 
 - **Environment Variables:**
-  - Connects to RabbitMQ (`RABBITMQ_HOST`, `RABBITMQ_PORT`, `RABBITMQ_USER`, `RABBITMQ_PASS`).
-  - Port is loaded from a ConfigMap (`CONSUMER_PORT`).
+  - connects to RabbitMQ (`RABBITMQ_HOST`, `RABBITMQ_PORT`, `RABBITMQ_USER`, `RABBITMQ_PASS`)
+  - port is loaded from a ConfigMap (`CONSUMER_PORT`)
 
 - **Port:**
   - The container exposes port 3000 for the service.
@@ -40,8 +40,6 @@ Controls network access for the Consumer application.
 - **Egress (Outgoing Traffic):**
   - allows communication with RabbitMQ pods (port 5672)
   - allows DNS queries over UDP and TCP (port 53)
-
-The network access is tightly restricted to enhance security.
 
 ---
 
