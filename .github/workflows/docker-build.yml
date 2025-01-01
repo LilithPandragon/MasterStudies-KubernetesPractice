@@ -8,6 +8,11 @@ on:
       - 'producer/**'
       - '.github/workflows/docker-build.yml'
 
+# Add these permissions
+permissions:
+  contents: read
+  packages: write    # This is required to push to ghcr.io
+
 jobs:
   build:
     runs-on: ubuntu-latest
