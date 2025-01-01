@@ -1,9 +1,9 @@
 # AKTT1 Group 1 Kubernetes Deployment
 ```
 Group 01 
-   Harald Beier 
-   Susanne Peer 
-   Patrick Prugger
+   Harald Beier alias haraldthegrey
+   Susanne Peer alias LilithPandragon
+   Patrick Prugger alias pprugger
 ```
 
 # Step 2 Application - May the flower power be with you
