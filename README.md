@@ -225,6 +225,6 @@ Lessons learned:
 
 ## Pull-Request for Step 4
 - Sent to Group 2
-- TBD
+- Sent on 2025-01-01
 
 
