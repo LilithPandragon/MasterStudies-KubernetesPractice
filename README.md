@@ -99,11 +99,32 @@ AKTT1-GROUP1-K8S/
 
 ## **Security Configuration**
 ### **Base Security Hardening**
-1. **Pod Security Context:**
+1. #### **Pod Security Context:**
    - Non-root user execution
+     - *Description*: Ensures that containers run as a non-root user instead of the default `root`.
+       - *Mitigated Attacks*:
+         - *Privilege Escalation*: Prevents attackers from escalating privileges to the host level.
+         - *Host Compromise*: Limits the ability of a compromised container to gain unauthorized access to the host system or other containers.
+         - *Malware Execution*: Reduces the risk of executing malicious software requiring root privileges.
    - Read-only root filesystem
+     - *Description*: Configures the container's root filesystem to be mounted as read-only.
+       - *Mitigated Attacks*
+         - *Tampering*: Prevents unauthorized modifications to the application or system files.
+         - *Data Exfiltration*: Reduces the ability of attackers to store or modify sensitive data within the container.
+         - *Persistent Malware*: Prevents attackers from installing persistent backdoors or malicious binaries.
    - Dropped capabilities
+     - *Description*: Removes unneeded Linux capabilities from the container runtime.
+       - *Mitigated Attacks*:
+         - *Excessive Privilege Exploitation*: Prevents abuse of capabilities like `CAP_NET_ADMIN` (network configuration) or `CAP_SYS_ADMIN` (system administration).
+         - *System Misuse*: Limits the attacker's ability to misuse system calls or access sensitive kernel operations.
    - RunAsUser and fsGroup defined
+   - *Description*:
+     - `RunAsUser`: Defines a specific non-root UID for processes.
+     - `fsGroup`: Sets a GID for shared filesystem access.
+     - *Mitigated Attacks*:
+       - *Improper File Permissions*: Ensures the container and its processes cannot access files they should not.
+       - *Cross-Container Attacks*: Prevents access to shared volumes or directories between containers without proper permissions.
+       - *Privilege Mismanagement*: Avoids the misuse of root UID or default group IDs that might unintentionally have elevated permissions.
 
 2. **Container Security:**
    - Resource limits enforced
