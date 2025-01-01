@@ -43,7 +43,7 @@ AKTT1-GROUP1-K8S/
 |       |-- kustomization.yaml
 |   |-- overlays/           # Environment configurations (prod/test)
 |-- scripts/                # Helper scripts
-|-- README.md               # You are here 😊 
+|-- README.md               # 🔴 You are here  
 ```
 
 
