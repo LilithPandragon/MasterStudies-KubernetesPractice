@@ -132,8 +132,27 @@ AKTT1-GROUP1-K8S/
 
 2. **Container Security:**
    - Resource limits enforced
+     -  *Description*: Defines CPU and memory usage limits for each container.
+     -  *Mitigated Attacks*:
+       -  *Denial of Service (DoS)*: Prevents resource exhaustion caused by malicious or misbehaving containers.
+       -  *Cross-Container Impact*: Ensures a single container cannot monopolize node resources, maintaining stability for other workloads.
+       -  *Unpredictable Behavior*: Helps avoid performance degradation due to over-consumption of resources.
    - Latest base images used
+     - *Description*: Ensures containers are built using the latest, patched versions of base images.
+       - *Mitigated Attacks*:
+         - *Known Vulnerabilities*: Reduces exposure to exploits by eliminating unpatched security flaws.
+         - *Malicious Code Injection*: Minimizes risks from outdated or unsupported images that may have been compromised.
+         - *Zero-Day Exploits*: Limits the attack surface by staying updated with security fixes and enhancements.
    - No privileged containers
+     - *Description*: Prevents containers from running in privileged mode, which grants unrestricted host access.
+     - *Mitigated Attacks*:
+       - *Host Takeover*: Blocks attackers from gaining root-level access to the host node.
+       - *Sensitive Data Breaches*: Prevents unauthorized access to host-level resources, such as `/etc/passwd` or `/var/lib/docker`.
+       -  *Kernel Exploits*: Reduces the likelihood of exploiting host kernel vulnerabilities through privileged containers.
+> By enforcing resource limits, using latest base images, and avoiding privileged containers, you can:
+> - Improve the stability and reliability of your Kubernetes clusters.
+> - Reduce exposure to vulnerabilities and exploits.
+> - Maintain a secure and controlled containerized environment.
 
 3. **RBAC Implementation:**
    - Service accounts with minimal permissions
