@@ -101,40 +101,82 @@ AKTT1-GROUP1-K8S/
 ### **Base Security Hardening**
 1. #### **Pod Security Context:**
    - Non-root user execution
-     - *Description*: Ensures that containers run as a non-root user instead of the default `root`.
-       - *Mitigated Attacks*:
-         - *Privilege Escalation*: Prevents attackers from escalating privileges to the host level.
-         - *Host Compromise*: Limits the ability of a compromised container to gain unauthorized access to the host system or other containers.
-         - *Malware Execution*: Reduces the risk of executing malicious software requiring root privileges.
+   - *Description*: Ensures that containers run as a non-root user instead of the default `root`.
+   - *Mitigated Attacks*:
+     - *Privilege Escalation*: Prevents attackers from escalating privileges to the host level.
+     - *Host Compromise*: Limits the ability of a compromised container to gain unauthorized access to the host system or other containers.
+     - *Malware Execution*: Reduces the risk of executing malicious software requiring root privileges.
    - Read-only root filesystem
-     - *Description*: Configures the container's root filesystem to be mounted as read-only.
-       - *Mitigated Attacks*
-         - *Tampering*: Prevents unauthorized modifications to the application or system files.
-         - *Data Exfiltration*: Reduces the ability of attackers to store or modify sensitive data within the container.
-         - *Persistent Malware*: Prevents attackers from installing persistent backdoors or malicious binaries.
+   - *Description*: Configures the container's root filesystem to be mounted as read-only.
+   - *Mitigated Attacks*
+     - *Tampering*: Prevents unauthorized modifications to the application or system files.
+     - *Data Exfiltration*: Reduces the ability of attackers to store or modify sensitive data within the container.
+     - *Persistent Malware*: Prevents attackers from installing persistent backdoors or malicious binaries.
    - Dropped capabilities
-     - *Description*: Removes unneeded Linux capabilities from the container runtime.
-       - *Mitigated Attacks*:
-         - *Excessive Privilege Exploitation*: Prevents abuse of capabilities like `CAP_NET_ADMIN` (network configuration) or `CAP_SYS_ADMIN` (system administration).
-         - *System Misuse*: Limits the attacker's ability to misuse system calls or access sensitive kernel operations.
+   - *Description*: Removes unneeded Linux capabilities from the container runtime.
+   - *Mitigated Attacks*:
+     - *Excessive Privilege Exploitation*: Prevents abuse of capabilities like `CAP_NET_ADMIN` (network configuration) or `CAP_SYS_ADMIN` (system administration).
+     - *System Misuse*: Limits the attacker's ability to misuse system calls or access sensitive kernel operations.
    - RunAsUser and fsGroup defined
    - *Description*:
      - `RunAsUser`: Defines a specific non-root UID for processes.
      - `fsGroup`: Sets a GID for shared filesystem access.
-     - *Mitigated Attacks*:
-       - *Improper File Permissions*: Ensures the container and its processes cannot access files they should not.
-       - *Cross-Container Attacks*: Prevents access to shared volumes or directories between containers without proper permissions.
-       - *Privilege Mismanagement*: Avoids the misuse of root UID or default group IDs that might unintentionally have elevated permissions.
+   - *Mitigated Attacks*:
+     - *Improper File Permissions*: Ensures the container and its processes cannot access files they should not.
+     - *Cross-Container Attacks*: Prevents access to shared volumes or directories between containers without proper permissions.
+     - *Privilege Mismanagement*: Avoids the misuse of root UID or default group IDs that might unintentionally have elevated permissions.
+> Through defining a robust Pod Security Context, we try to achieve:
+> - Minimize privilege-related vulnerabilities.
+> - Harden our containers against tampering and exploitation.
+> - Promote compliance with security best practices in containerized environments.
 
 2. **Container Security:**
    - Resource limits enforced
+   -  *Description*: Defines CPU and memory usage limits for each container.
+   -  *Mitigated Attacks*:
+     - *Denial of Service (DoS)*: Prevents resource exhaustion caused by malicious or misbehaving containers.
+     - *Cross-Container Impact*: Ensures a single container cannot monopolize node resources, maintaining stability for other workloads.
+     - *Unpredictable Behavior*: Helps avoid performance degradation due to over-consumption of resources.
    - Latest base images used
+   - *Description*: Ensures containers are built using the latest, patched versions of base images.
+   - *Mitigated Attacks*:
+     - *Known Vulnerabilities*: Reduces exposure to exploits by eliminating unpatched security flaws.
+     - *Malicious Code Injection*: Minimizes risks from outdated or unsupported images that may have been compromised.
+     - *Zero-Day Exploits*: Limits the attack surface by staying updated with security fixes and enhancements.
    - No privileged containers
+   - *Description*: Prevents containers from running in privileged mode, which grants unrestricted host access.
+   - *Mitigated Attacks*:
+     - *Host Takeover*: Blocks attackers from gaining root-level access to the host node.
+     - *Sensitive Data Breaches*: Prevents unauthorized access to host-level resources, such as `/etc/passwd` or `/var/lib/docker`.
+     - *Kernel Exploits*: Reduces the likelihood of exploiting host kernel vulnerabilities through privileged containers.
+> By enforcing resource limits, using latest base images, and avoiding privileged containers, you can:
+> - Improve the stability and reliability of your Kubernetes clusters.
+> - Reduce exposure to vulnerabilities and exploits.
+> - Maintain a secure and controlled containerized environment.
 
 3. **RBAC Implementation:**
    - Service accounts with minimal permissions
+   - *Description*: Assigns specific service accounts with the least privilege necessary for their tasks.
+   - *Mitigated Attacks*:
+     - *Privilege Escalation*: Prevents misuse of overprivileged service accounts to gain unauthorized access.
+     - *Lateral Movement*: Limits the ability of attackers to access other resources using compromised service accounts.
+     - *Resource Abuse*: Ensures that service accounts can only perform their intended operations, reducing misuse.
    - Role-based access control for components
+   - *Description*: Implements RBAC rules to define which components or users can perform specific actions.
+   - *Mitigated Attacks*:
+     - *Unauthorized Access*: Blocks unauthorized users or components from accessing sensitive resources or APIs.
+     - *Accidental Misconfiguration*: Reduces human errors by restricting access to configuration files and operations.
+     - *Data Breaches*: Protects sensitive information by ensuring only authorized roles can access certain data.
    - Namespace isolation
+   - *Description*: Segregates workloads and resources into distinct namespaces, with specific RBAC rules applied per namespace.
+   - *Mitigated Attacks*:
+     - *Cross-Namespace Exploits*: Prevents attackers from accessing resources in other namespaces.
+     - *Resource Contention*: Ensures workloads in one namespace do not interfere with those in another.
+     - *Unintended Exposure*: Reduces the risk of exposing resources or data to unauthorized entities.
+> By implementing service accounts with minimal permissions, enforcing role-based access control, and leveraging namespace isolation, we want to achieve and ensure:
+> - Ensure proper access management and minimize the attack surface.
+> - Protect sensitive data and resources through controlled access.
+> - Strengthen the overall security and compliance of your Kubernetes environment.
 
 ### **Network Policies**
 The deployment includes NetworkPolicies to control pod-to-pod communication:
@@ -153,6 +195,13 @@ The deployment includes NetworkPolicies to control pod-to-pod communication:
 - Allows outbound AMQP communication to RabbitMQ
 - Enables DNS resolution (TCP/UDP port 53)
 
+NetworkPolicies help secure Kubernetes clusters by restricting traffic flows, mitigating various attack vectors:
+- **Unauthorized Access**: Blocks unauthorized pods or external entities from communicating with sensitive services, reducing the risk of data breaches.
+- **Lateral Movement**: Prevents attackers from moving between pods or namespaces, containing the impact of a compromised pod.
+- **Exploitation of Open Ports**: Limits exposure by allowing traffic only on specific ports, reducing the attack surface.
+- **DNS Spoofing and Reconnaissance**: Restricts egress traffic, preventing malicious pods from resolving external domains or conducting reconnaissance.
+- **Denial of Service (DoS)**: Ensures critical services are protected from unregulated traffic that could lead to resource exhaustion.
+By enforcing strict ingress and egress rules, NetworkPolicies significantly enhance the security posture of a Kubernetes deployment.
 
 ## Pull-Request for Step 3
 - Sent to Group 2
