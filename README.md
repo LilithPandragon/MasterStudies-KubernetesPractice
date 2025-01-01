@@ -5,6 +5,26 @@ Harald Beier
 Susanne Peer 
 Patrick Prugger
 ```
+
+By the power of the Rose
+
+
+```plaintext
+⠀⠀⠀⠀⠀⠀⡤⡀⠠⡀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⠆⣸⠃⠊⠭⠂⣠⠀
+⠀⠀⠀⠀⢠⠃⡐⠃⠀⠀⠀⡌⠱⡀
+⠀⠀⠀⠀⠰⡀⡄⠀⠀⠀⡜⢀⠒⠁
+⠀⠀⠀⠀⠀⢈⡟⢔⠒⣈⠔⠁⠀⠀
+⠀⠀⠀⠀⠀⡼⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠰⠇⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢰⠀⠀⢀⢱⠀⠀⠀⠀⠀
+⠶⡤⠄⡀⢸⠀⣠⢊⡌⠀⠀⠀⠀⠀
+⠀⠈⠄⠈⢢⠊⡡⠋⠀⠀⠀⠀⠀⠀
+⠀⠀⠸⠀⠀⢠⠁⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠡⡈⢜⡀⣀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠈⠒⠓⠃⠀⠀⠀⠀⠀⠀
+```
+
 # Step 2 Application - May the flower power be with you
 ## Branch Protection
 > Activated but the rule from Github: *Your rules won't be enforced on this private repository until one of your organization's owners upgrades the account to GitHub Team or Enterprise.*
@@ -138,23 +158,4 @@ Lessons learned:
 - Sent to Group 2
 - TBD
 
----
 
-By the power of the Rose
-
-
-```plaintext
-⠀⠀⠀⠀⠀⠀⡤⡀⠠⡀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢀⠆⣸⠃⠊⠭⠂⣠⠀
-⠀⠀⠀⠀⢠⠃⡐⠃⠀⠀⠀⡌⠱⡀
-⠀⠀⠀⠀⠰⡀⡄⠀⠀⠀⡜⢀⠒⠁
-⠀⠀⠀⠀⠀⢈⡟⢔⠒⣈⠔⠁⠀⠀
-⠀⠀⠀⠀⠀⡼⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠰⠇⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⢰⠀⠀⢀⢱⠀⠀⠀⠀⠀
-⠶⡤⠄⡀⢸⠀⣠⢊⡌⠀⠀⠀⠀⠀
-⠀⠈⠄⠈⢢⠊⡡⠋⠀⠀⠀⠀⠀⠀
-⠀⠀⠸⠀⠀⢠⠁⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠡⡈⢜⡀⣀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠈⠒⠓⠃⠀⠀⠀⠀⠀⠀
-```
