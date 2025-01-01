@@ -1,6 +1,8 @@
 # Producer - Setup
 Used libaries and coding language
 - [pika 1.3.2](https://pypi.org/project/pika/) for implementation of the AMQP 0-9-1 protocol including RabbitMQ’s extensions.
+
+Used docker image from dockerhub
 - [Python 3.9](https://github.com/docker-library/python/blob/master/3.9/slim-bullseye/Dockerfile)
 
 ## Function:
