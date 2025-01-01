@@ -6,6 +6,17 @@ Used libaries and coding language
 
 Used docker image from dockerhub
 - [node:16-alpine]([https://www.npmjs.com/package/nodemon/v/3.0.3](https://hub.docker.com/_/node/)
+
+## Function:
+-  server.js establish a connection to the rabbitmq and the `async function connectQueue()` retries 10 times to establish a connection
+-  Afterwards the recieved JSON will be parsed and pushed to a queue 
+-  For the messages that are parsed to string a array is used
+-  The javascript graphic userinterface offers to buttons `Refresh Messages` and `Delete All Messages`
+-  `Delete All Messages uses the array` and this be cleared with `app.post('/clear-messages', (req, res) => {
+    messages.length = 0; // Clear the messages array
+    res.sendStatus(200);
+});`
+- Additionally the environment will be determined based on RabbitMQ port: `const environmentText = rabbitmq_port === '5672' ? 'Test Deployment' : 'Production Deployment';`
 ### **Steps to Build and Run the Configuration**
 
 *Build and Push the Docker Image*:
