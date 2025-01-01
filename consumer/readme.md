@@ -36,6 +36,7 @@ Used docker image from dockerhub
      - uses the current timestamp as the image version
      - builds and tags the Docker image
      - pushes both the versioned and `latest` image tags to the registry (`ghcr.io/mcce2024`)
+     - Additionally checks for a correct GITHUB_TOKEN if not a push is prohibited
 
 *Run the Docker Container*:
    - Start the service using Docker:
@@ -43,8 +44,6 @@ Used docker image from dockerhub
   
    - application will be accessible at `http://localhost:3000`
 > Action is no longer needed because there is a github action for this `build (consumer)`
-
-
 ---
 ### **Service Communication Overview**
 
