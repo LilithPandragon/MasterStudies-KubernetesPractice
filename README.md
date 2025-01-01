@@ -118,9 +118,9 @@ AKTT1-GROUP1-K8S/
          - *Excessive Privilege Exploitation*: Prevents abuse of capabilities like `CAP_NET_ADMIN` (network configuration) or `CAP_SYS_ADMIN` (system administration).
          - *System Misuse*: Limits the attacker's ability to misuse system calls or access sensitive kernel operations.
    - RunAsUser and fsGroup defined
-   - *Description*:
-     - `RunAsUser`: Defines a specific non-root UID for processes.
-     - `fsGroup`: Sets a GID for shared filesystem access.
+     - *Description*:
+       - `RunAsUser`: Defines a specific non-root UID for processes.
+       - `fsGroup`: Sets a GID for shared filesystem access.
      - *Mitigated Attacks*:
        - *Improper File Permissions*: Ensures the container and its processes cannot access files they should not.
        - *Cross-Container Attacks*: Prevents access to shared volumes or directories between containers without proper permissions.
@@ -139,7 +139,7 @@ AKTT1-GROUP1-K8S/
        -  *Unpredictable Behavior*: Helps avoid performance degradation due to over-consumption of resources.
    - Latest base images used
      - *Description*: Ensures containers are built using the latest, patched versions of base images.
-       - *Mitigated Attacks*:
+     - *Mitigated Attacks*:
          - *Known Vulnerabilities*: Reduces exposure to exploits by eliminating unpatched security flaws.
          - *Malicious Code Injection*: Minimizes risks from outdated or unsupported images that may have been compromised.
          - *Zero-Day Exploits*: Limits the attack surface by staying updated with security fixes and enhancements.
