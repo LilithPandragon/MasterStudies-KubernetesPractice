@@ -3,6 +3,7 @@ Used libaries and coding language
 - [amqplib 0.10.3](https://www.npmjs.com/package/amqplib/v/0.10.3) 
 - [express 4.18.2](https://www.npmjs.com/package/express/v/4.18.2)
 - [nodemon 3.0.3](https://www.npmjs.com/package/nodemon/v/3.0.3)
+
 Used docker image from dockerhub
 - [node:16-alpine]([https://www.npmjs.com/package/nodemon/v/3.0.3](https://hub.docker.com/_/node/)
 ### **Steps to Build and Run the Configuration**
