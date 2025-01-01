@@ -195,6 +195,13 @@ The deployment includes NetworkPolicies to control pod-to-pod communication:
 - Allows outbound AMQP communication to RabbitMQ
 - Enables DNS resolution (TCP/UDP port 53)
 
+NetworkPolicies help secure Kubernetes clusters by restricting traffic flows, mitigating various attack vectors:
+- **Unauthorized Access**: Blocks unauthorized pods or external entities from communicating with sensitive services, reducing the risk of data breaches.
+- **Lateral Movement**: Prevents attackers from moving between pods or namespaces, containing the impact of a compromised pod.
+- **Exploitation of Open Ports**: Limits exposure by allowing traffic only on specific ports, reducing the attack surface.
+- **DNS Spoofing and Reconnaissance**: Restricts egress traffic, preventing malicious pods from resolving external domains or conducting reconnaissance.
+- **Denial of Service (DoS)**: Ensures critical services are protected from unregulated traffic that could lead to resource exhaustion.
+By enforcing strict ingress and egress rules, NetworkPolicies significantly enhance the security posture of a Kubernetes deployment.
 
 ## Pull-Request for Step 3
 - Sent to Group 2
