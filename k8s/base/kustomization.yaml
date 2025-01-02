@@ -1,0 +1,15 @@
+﻿apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- consumer/deployment.yaml
+- consumer/service.yaml
+- consumer/networkpolicy.yaml
+- consumer/serviceaccount.yaml
+- producer/deployment.yaml
+- producer/networkpolicy.yaml
+- producer/serviceaccount.yaml
+- rabbitmq/deployment.yaml
+- rabbitmq/service.yaml
+- rabbitmq/networkpolicy.yaml
+- rabbitmq/serviceaccount.yaml

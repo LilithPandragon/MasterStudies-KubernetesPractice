@@ -1,67 +1,72 @@
 ## **Deploying the project**
 ### **Steps to start the containers in k8s**
-- Navigate to the k8s directory
-- Run the deployment script
+- navigate to the k8s directory
+- run the deployment script
 
--  For Linux:
-```
-./deploy-k8s.sh
-```
-- For Windows:
-```
-./deploy-k8s.ps1
-```
+   - Linux/MacOS:
+   ```
+   ./scripts/deploy-k8s.sh
+   ```
+   - Windows (PowerShell):
+   ```
+   ./scripts/deploy-k8s.ps1
+   ```
 **The script performs the following tasks:**
-   - Generates RabbitMQ credentials and creates a secret file (`rabbitmq-secret.yaml`)
-   - Deploys RabbitMQ, the Consumer service, and the Producer as a CronJob
-   - Displays running pods and services
+   - creates a namespace `mcce-g1-test` or `mcce-g1-prod`
+   - sets context to the namespace `mcce-g1-test` or `mcce-g1-prod`
+   - generates RabbitMQ credentials and creates a secret file (`rabbitmq-secret.yaml`)
+   - deploys RabbitMQ, consumer service, and producer as a CronJob
+   - deploys necessary network policies
+   - patches deployment to use overlays
+   - displays running pods and services
 
 The generated credentials will be shown in the terminal at the end. Note them down for future use.
 The credentials change with every deployment.
 
-#########################################################################################
-
 ## *Service Communication*
 *RabbitMQ:*
-   - RabbitMQ is started via the `rabbitmq-deployment.yaml` deployment.
-     Credentials are obtained from the `rabbitmq-secret.yaml` secret.
-   - RabbitMQ has two services:
-     - **AMQP Port (5672):** For messages between Producer and Consumer
-     - **Management UI (15672):** Accessible via `rabbitmq-management` on the host on port 15672
+   - RabbitMQ is started via `rabbitmq-deployment.yaml` deployment
+   - credentials are obtained from the `rabbitmq-secret.yaml` secret
+   - RabbitMQ service layout:
+      - Test
+         - **AMQP Port (5672):** for messages between producer and consumer
+         - **Management UI (15672):** Accessible via `rabbitmq-management` on the host on port 15672
+      - Prod
+         - **AMQP Port (5673):** for messages between producer and consumer
 
 *Producer (CronJob):*
-   - Runs every minute according to `cronjob.yaml`
-   - Produces messages and sends them to RabbitMQ (Hostname: `rabbitmq`, Port: `5672`)
+   - runs every minute according to `cronjob.yaml`
+   - produces messages and sends them to RabbitMQ (Hostname: `rabbitmq`, Test Port: `5672`, Prod Port: `5673`)
 
 *Consumer (Deployment and Service):*
-   - Listens for messages from RabbitMQ
-   - Exposes an HTTP service (Port: `8080`) via the LoadBalancer `consumer-service.yaml`
+   - listens for messages from RabbitMQ
+   - exposes a HTTP service (Test Port: `8080`, Prod Port: `8081`) via LoadBalancer `consumer-service.yaml`
 
-#########################################################################################
 
 ## **Deleting the Configuration**
 *Execute the deletion script from:*
-   - For Linux/MacOS:
-     ```
-     ./delete-deployment.sh
+   - Linux/MacOS:
+     ```bash
+     ./scripts/delete-deployment.sh
       ```
      
-   - For Windows (PowerShell):
-     ```
-      ./delete-deployment.ps1
+   - Windows (PowerShell):
+     ```bash
+      ./scripts/delete-deployment.ps1
      ```
       
 *The script removes:*
-   - RabbitMQ Deployment, Secret, and Services
-   - Producer (CronJob)
-   - Consumer (Deployment and Service)
+   - RabbitMQ deployment, secret, and services
+   - producer (CronJob)
+   - consumer (deployment and service)
+   - network policies
+   - namespace `mcce-g1-test` or `mcce-g1-prod`
 
-#########################################################################################
-
-- *Simple Communication:* RabbitMQ serves as a message center between Producer & Consumer
-- *Configuration Changes:* Changes to the deployment strategy can be made in the corresponding
+## General Notes
+- *Simple Communication:* RabbitMQ serves as a message center between producer & consumer
+- *Configuration Changes:* changes to deployment strategy can be made in the corresponding
                           YAML files
-- *Troubleshooting:* Use `kubectl logs` for debugging:
-```
-  kubectl logs <POD-NAME>
-```
+- *Troubleshooting:* use `kubectl logs` for debugging:
+   ```
+   kubectl logs <POD-NAME>
+   ```

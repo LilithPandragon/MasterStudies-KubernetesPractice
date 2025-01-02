@@ -1,0 +1,112 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0" version="26.0.1">
+  <diagram id="k8s-architecture" name="Kubernetes Architecture">
+    <mxGraphModel dx="1562" dy="818" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="prod-env" value="Production Environment" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" parent="1" vertex="1">
+          <mxGeometry x="70" y="40" width="720" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="rabbitmq-prod" value="RabbitMQ&#xa;Deployment" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNTAwIj48cGF0aCBkPSJNMjUwIDQ2OS44bC0yMTEuNi0xMjIuMnYtMjQ0LjRsMjExLjYtMTIyLjIgMjExLjYgMTIyLjJ2MjQ0LjR6IiBmaWxsPSIjMzI2Q0U1Ii8+PC9zdmc+" parent="prod-env" vertex="1">
+          <mxGeometry x="320" y="120" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="producer-prod" value="Producer&#xa;CronJob" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNTAwIj48cGF0aCBkPSJNMjUwIDQ2OS44bC0yMTEuNi0xMjIuMnYtMjQ0LjRsMjExLjYtMTIyLjIgMjExLjYgMTIyLjJ2MjQ0LjR6IiBmaWxsPSIjMzI2Q0U1Ii8+PC9zdmc+" parent="prod-env" vertex="1">
+          <mxGeometry x="120" y="120" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="consumer-prod" value="Consumer&#xa;Deployment" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNTAwIj48cGF0aCBkPSJNMjUwIDQ2OS44bC0yMTEuNi0xMjIuMnYtMjQ0LjRsMjExLjYtMTIyLjIgMjExLjYgMTIyLjJ2MjQ0LjR6IiBmaWxsPSIjMzI2Q0U1Ii8+PC9zdmc+" parent="prod-env" vertex="1">
+          <mxGeometry x="520" y="120" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rabbitmq-network-policy" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#FF0000;" parent="prod-env" vertex="1">
+          <mxGeometry x="300" y="80" width="120" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="producer-network-policy" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#00FF00;" parent="prod-env" vertex="1">
+          <mxGeometry x="100" y="80" width="120" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="consumer-network-policy" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#0000FF;align=center;" parent="prod-env" vertex="1">
+          <mxGeometry x="500" y="80" width="120" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="producer-to-rabbitmq-prod" value="AMQP&#xa;5672" style="endArrow=classic;html=1;rounded=0;" parent="prod-env" source="producer-prod" target="rabbitmq-prod" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rabbitmq-to-consumer-prod" value="AMQP&#xa;5672" style="endArrow=classic;html=1;rounded=0;" parent="prod-env" source="rabbitmq-prod" target="consumer-prod" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="M9EMofckQWbuQOGsvdlu-3" value="&lt;div align=&quot;center&quot;&gt;Consumer Network Policy&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="prod-env" vertex="1">
+          <mxGeometry x="505" y="80" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="M9EMofckQWbuQOGsvdlu-4" value="RabbitMQ Network Policy" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="prod-env" vertex="1">
+          <mxGeometry x="305" y="80" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="M9EMofckQWbuQOGsvdlu-6" value="Producer Network Policy" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="prod-env" vertex="1">
+          <mxGeometry x="105" y="80" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="M9EMofckQWbuQOGsvdlu-1" value="External Access" style="ellipse;whiteSpace=wrap;html=1;" parent="prod-env" vertex="1">
+          <mxGeometry x="420" y="300" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="localhost-to-consumer-prod" value="HTTP&lt;br&gt;&lt;div&gt;8081&lt;/div&gt;" style="endArrow=classic;html=1;rounded=0;dashed=1;exitX=0.395;exitY=0.003;exitDx=0;exitDy=0;exitPerimeter=0;" parent="prod-env" source="M9EMofckQWbuQOGsvdlu-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="415" y="320" as="sourcePoint" />
+            <mxPoint x="523.8888888888889" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="test-env" value="Test Environment" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="70" y="450" width="720" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="rabbitmq-test" value="RabbitMQ&#xa;Deployment&#xa;" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNTAwIj48cGF0aCBkPSJNMjUwIDQ2OS44bC0yMTEuNi0xMjIuMnYtMjQ0LjRsMjExLjYtMTIyLjIgMjExLjYgMTIyLjJ2MjQ0LjR6IiBmaWxsPSIjMzI2Q0U1Ii8+PC9zdmc+" parent="test-env" vertex="1">
+          <mxGeometry x="320" y="120" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="producer-test" value="Producer&#xa;CronJob" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNTAwIj48cGF0aCBkPSJNMjUwIDQ2OS44bC0yMTEuNi0xMjIuMnYtMjQ0LjRsMjExLjYtMTIyLjIgMjExLjYgMTIyLjJ2MjQ0LjR6IiBmaWxsPSIjMzI2Q0U1Ii8+PC9zdmc+" parent="test-env" vertex="1">
+          <mxGeometry x="120" y="120" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="consumer-test" value="Consumer&#xa;Deployment" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNTAwIj48cGF0aCBkPSJNMjUwIDQ2OS44bC0yMTEuNi0xMjIuMnYtMjQ0LjRsMjExLjYtMTIyLjIgMjExLjYgMTIyLjJ2MjQ0LjR6IiBmaWxsPSIjMzI2Q0U1Ii8+PC9zdmc+" parent="test-env" vertex="1">
+          <mxGeometry x="520" y="120" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rabbitmq-network-policy-test" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#FF0000;" parent="test-env" vertex="1">
+          <mxGeometry x="300" y="80" width="120" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="producer-network-policy-test" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#00FF00;" parent="test-env" vertex="1">
+          <mxGeometry x="100" y="80" width="120" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="consumer-network-policy-test" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#0000FF;" parent="test-env" vertex="1">
+          <mxGeometry x="500" y="80" width="120" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="producer-to-rabbitmq-test" value="AMQP&#xa;5672" style="endArrow=classic;html=1;rounded=0;" parent="test-env" source="producer-test" target="rabbitmq-test" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rabbitmq-to-consumer-test" value="AMQP&#xa;5672" style="endArrow=classic;html=1;rounded=0;" parent="test-env" source="rabbitmq-test" target="consumer-test" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="M9EMofckQWbuQOGsvdlu-7" value="&lt;div align=&quot;center&quot;&gt;Consumer Network Policy&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="test-env" vertex="1">
+          <mxGeometry x="505" y="85" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="M9EMofckQWbuQOGsvdlu-8" value="RabbitMQ Network Policy" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="test-env" vertex="1">
+          <mxGeometry x="305" y="85" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="M9EMofckQWbuQOGsvdlu-9" value="Producer Network Policy" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="test-env" vertex="1">
+          <mxGeometry x="105" y="85" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="localhost" value="External Access" style="ellipse;whiteSpace=wrap;html=1;" parent="test-env" vertex="1">
+          <mxGeometry x="400" y="290" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="localhost-to-consumer-test" value="HTTP&lt;br&gt;8080" style="endArrow=classic;html=1;rounded=0;dashed=1;entryX=0.167;entryY=0.625;entryDx=0;entryDy=0;entryPerimeter=0;" parent="test-env" source="localhost" target="consumer-network-policy-test" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="localhost-to-rabbitmq-test" value="HTTP&#xa;15672" style="endArrow=classic;html=1;rounded=0;dashed=1;entryX=0.75;entryY=0.625;entryDx=0;entryDy=0;entryPerimeter=0;" parent="test-env" source="localhost" target="rabbitmq-network-policy-test" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="Legend" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="800" y="40" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-rabbitmq" value="RabbitMQ Network Policy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#FF0000;" parent="legend" vertex="1">
+          <mxGeometry x="20" y="40" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-producer" value="Producer Network Policy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#00FF00;" parent="legend" vertex="1">
+          <mxGeometry x="20" y="80" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-consumer" value="Consumer Network Policy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#0000FF;" parent="legend" vertex="1">
+          <mxGeometry x="20" y="120" width="160" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

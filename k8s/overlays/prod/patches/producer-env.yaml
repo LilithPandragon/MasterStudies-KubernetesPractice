@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: producer
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: producer
+            env:
+            - name: RABBITMQ_PORT
+              value: "5673" 

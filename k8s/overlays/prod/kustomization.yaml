@@ -1,0 +1,24 @@
+﻿apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: mcce-g1-prod
+
+resources:
+- namespace.yaml
+- ../../base
+- rabbitmq-secret.yaml
+
+patches:
+- path: patches/service-ports.yaml
+- path: patches/consumer-ports.yaml
+- path: patches/consumer-env.yaml
+- path: patches/producer-env.yaml
+- path: patches/rabbitmq-networkpolicy.yaml
+- path: patches/consumer-networkpolicy.yaml
+- path: patches/producer-networkpolicy.yaml
+
+configMapGenerator:
+- name: app-config
+  literals:
+  - ENVIRONMENT=prod
+  - CONSUMER_PORT=3000

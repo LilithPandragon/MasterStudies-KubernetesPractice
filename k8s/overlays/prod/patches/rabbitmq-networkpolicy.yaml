@@ -3,6 +3,7 @@ kind: NetworkPolicy
 metadata:
   name: rabbitmq-network-policy
 spec:
+  $patch: replace
   podSelector:
     matchLabels:
       app: rabbitmq
@@ -19,12 +20,9 @@ spec:
             app: consumer
       ports:
         - protocol: TCP
-          port: 5672  # AMQP port
-    - ports:
+          port: 5672
         - protocol: TCP
-          port: 15672 # Management port
-      # Allow all sources to management interface
-      # You might want to restrict this further in production
+          port: 5673
   egress:
     - to:
       - podSelector:
@@ -32,7 +30,9 @@ spec:
             app: consumer
       - podSelector:
           matchLabels:
-            app: rabbitmq-producer
+            app: producer
       ports:
         - protocol: TCP
-          port: 5672 
+          port: 5672
+        - protocol: TCP
+          port: 5673 

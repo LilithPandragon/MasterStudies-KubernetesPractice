@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+spec:
+  template:
+    spec:
+      containers:
+      - name: consumer
+        env:
+        - name: RABBITMQ_PORT
+          value: "5673" 

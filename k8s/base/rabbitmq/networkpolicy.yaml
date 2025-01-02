@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: rabbitmq-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: rabbitmq
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: producer
+      - podSelector:
+          matchLabels:
+            app: consumer
+      ports:
+        - protocol: TCP
+          port: 5672  # AMQP port
+    - ports:
+        - protocol: TCP
+          port: 15672 # Management port
+      # Allow all sources to management interface
+      # You might want to restrict this further in production
+  egress:
+    - to:
+      - podSelector:
+          matchLabels:
+            app: consumer
+      - podSelector:
+          matchLabels:
+            app: producer
+      ports:
+        - protocol: TCP
+          port: 5672 

@@ -3,12 +3,19 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR"
 
+# Add prompt for environment selection
+read -p "Which environment do you want to deploy to? (test/prod): " ENVIRONMENT
+if [[ $ENVIRONMENT != "test" && $ENVIRONMENT != "prod" ]]; then
+    echo "Invalid environment. Please specify 'test' or 'prod'"
+    exit 1
+fi
+
 # Add prompt for rebuilding containers
 read -p "Do you want to rebuild the containers? (y/n): " REBUILD
 if [[ $REBUILD =~ ^[Yy]$ ]]; then
     echo "Building containers..."
-    ../consumer/build.sh
-    ../producer/build.sh
+    ../../consumer/build.sh
+    ../../producer/build.sh
 else
     echo "Skipping container rebuild..."
 fi
@@ -30,7 +37,7 @@ PASSWORD_B64=$(echo -n "$RabbitMQ_PASS" | base64)
 echo "Creating rabbitmq-secret.yaml with new credentials..."
 
 # Create the secret YAML file
-cat > ./rabbitmq-secret.yaml << EOF
+cat > "../overlays/$ENVIRONMENT/rabbitmq-secret.yaml" << EOF
 apiVersion: v1
 kind: Secret
 metadata:
@@ -41,27 +48,21 @@ data:
   password: $PASSWORD_B64
 EOF
 
-echo "Applying RabbitMQ deployment..."
-kubectl apply -f ./rabbitmq-serviceaccount.yaml
-kubectl apply -f ./rabbitmq-secret.yaml
-kubectl apply -f ./rabbitmq-deployment.yaml
-kubectl apply -f ./rabbitmq-service.yaml
+echo "Applying Kustomize deployment for $ENVIRONMENT environment..."
 
-echo "Applying CronJob as producer..."
-kubectl apply -f ./producer-serviceaccount.yaml
-kubectl apply -f ./cronjob.yaml
+# Apply the kustomization
+kubectl apply -k "../overlays/$ENVIRONMENT"
 
-echo "Applying Consumer deployment..."
-kubectl apply -f ./consumer-serviceaccount.yaml
-kubectl apply -f ./consumer-deployment.yaml
-kubectl apply -f ./consumer-service.yaml
-
-echo "Applying Network Policies..."
-kubectl apply -f ./rabbitmq-networkpolicy.yaml
-kubectl apply -f ./consumer-networkpolicy.yaml
-kubectl apply -f ./producer-networkpolicy.yaml
+echo "Waiting for RabbitMQ pod to be ready..."
+kubectl wait --for=condition=ready pod -l app=rabbitmq --timeout=30s
 
 echo "Deployment completed!"
+
+if [[ $ENVIRONMENT == "test" ]]; then
+    kubectl config set-context --current --namespace=mcce-g1-test
+else
+    kubectl config set-context --current --namespace=mcce-g1-prod
+fi
 
 echo "Showing pods..."
 kubectl get pods
@@ -69,7 +70,7 @@ kubectl get pods
 echo "Showing services..."
 kubectl get services
 
-# Store credentials in plain text for reference (optional)
+# Store credentials in plain text for reference
 echo "Generated credentials:"
 echo "Username: $RabbitMQ_USER"
 echo "Password: $RabbitMQ_PASS"

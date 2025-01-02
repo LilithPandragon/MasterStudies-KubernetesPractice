@@ -71,6 +71,9 @@ app.post('/clear-messages', (req, res) => {
 });
 
 app.get('/', (req, res) => {
+    // Determine environment based on RabbitMQ port
+    const environmentText = rabbitmq_port === '5672' ? 'Test Deployment' : 'Production Deployment';
+    
     res.send(`
         <!DOCTYPE html>
         <html>
@@ -138,11 +141,19 @@ app.get('/', (req, res) => {
                 .delete-button:hover {
                     background-color: #cc0000;
                 }
+                .environment-label {
+                    background-color: #007bff;
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 3px;
+                    display: inline-block;
+                    margin-bottom: 10px;
+                }
             </style>
             <script>
                 function refreshPage() {
                     const audio = document.getElementById('clickSound');
-                    audio.volume = 0.5;  // Set volume to 50% (0.5)
+                    audio.volume = 0.2;  // Set volume to 20% (0.2)
                     audio.play();
                     setTimeout(() => {
                         location.reload();
@@ -167,7 +178,8 @@ app.get('/', (req, res) => {
                 <div class="header-text">
                     <h1>AKTT1 G1 Consumer Dashboard</h1>
                     <h2>Beier, Peer, Prugger</h2>
-                    <h4 style="font-style: italic;">May the rose be with you.</h4>
+                    <h4 style="font-style: italic;">A part of Red Rose Inc.</h4>
+                    <div class="environment-label">${environmentText}</div>
                 </div>
             </div>
             <button class="refresh-button" onclick="refreshPage()">Refresh Messages</button>
@@ -185,7 +197,7 @@ app.get('/', (req, res) => {
     `);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.CONSUMER_PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log('RABBITMQ_URL:', RABBITMQ_URL);

@@ -1,8 +1,9 @@
-import pika
+import pika # type: ignore
 from datetime import datetime
 from zoneinfo import ZoneInfo
 import os
 import json
+import time
 
 # Get RabbitMQ connection details from environment variables
 rabbitmq_host = os.getenv('RABBITMQ_HOST', 'rabbitmq-service')
@@ -18,9 +19,26 @@ parameters = pika.ConnectionParameters(
     credentials=credentials
 )
 
+def try_connect(parameters, max_retries=30, retry_delay=2):
+    """Attempt to connect to RabbitMQ with retries"""
+    print(f"Starting connection attempts to RabbitMQ at {parameters.host}:{parameters.port}")
+    for attempt in range(max_retries):
+        try:
+            print(f"Connection attempt {attempt + 1}/{max_retries}...")
+            connection = pika.BlockingConnection(parameters)
+            print("Successfully connected to RabbitMQ!")
+            return connection
+        except Exception as e:  # Catch all exceptions
+            if attempt == max_retries - 1:  # Last attempt
+                print(f"Final attempt failed: {type(e).__name__}: {str(e)}")
+                raise  # Re-raise the last exception
+            print(f"Connection attempt {attempt + 1} failed: {type(e).__name__}: {str(e)}")
+            print(f"Retrying in {retry_delay} seconds...")
+            time.sleep(retry_delay)
+
 try:
-    # Establish connection
-    connection = pika.BlockingConnection(parameters)
+    # Establish connection with retry mechanism
+    connection = try_connect(parameters)
     channel = connection.channel()
 
     # Declare queue
