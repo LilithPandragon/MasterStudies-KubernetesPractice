@@ -1,6 +1,6 @@
 # AKTT1 Group 1 Kubernetes Deployment
 
-# Step 2 Application - May the flower power be with you
+# Step 1 Application - May the flower power be with you
 By the power of the Rose
 
 
@@ -77,11 +77,9 @@ AKTT1-GROUP1-K8S/
 11. **Logs:** Treat logs as event streams 
 12. **Admin processes:** Adminmanagement from rabbitmq can be ascessed 
 
-## Pull-Request for Step 2
-- Sent to Group 2
-- Sent at 2024-12-27
+---
 
-# Step 3: Kubernetes Application Security Checklist and implement 2-3 aspects in your manifest 
+# Step 2: Kubernetes Application Security Checklist and implement 2-3 aspects in your manifest 
 ## Base security hardening
 - Application design 
 - Service account
@@ -197,13 +195,8 @@ NetworkPolicies help secure Kubernetes clusters by restricting traffic flows, mi
 - **Denial of Service (DoS)**: Ensures critical services are protected from unregulated traffic that could lead to resource exhaustion.
 By enforcing strict ingress and egress rules, NetworkPolicies significantly enhance the security posture of a Kubernetes deployment.
 
-## Pull-Request for Step 3
-- Sent to Group 2
-- Sent at 2024-12-27
-Unfortunately we pushed here to the same branch as the previous step.
-So all commits are now in the same pull request.
 
-# Step 4: Templating (optional)
+# Step 3: Templating (optional)
 Lessons learned:
 - To avoid this problem for this step we have created a new branch called "templating".
 
@@ -217,6 +210,4 @@ Lessons learned:
 - changed the deployment scripts to use the overlays
 - changed the drawio file because we have a new port on prod
 
-## Pull-Request for Step 4
-- Sent to Group 2
-- Sent on 2025-01-01
+
